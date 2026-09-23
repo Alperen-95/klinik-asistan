@@ -120,6 +120,12 @@
       gap: 10px;
     }
 
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
     .form-group { margin-bottom: 12px; }
 
     label {
@@ -132,7 +138,7 @@
       letter-spacing: 0.5px;
     }
 
-    input[type="number"] {
+    input[type="number"], select {
       width: 100%;
       padding: 10px 12px;
       border: 1px solid var(--border);
@@ -144,7 +150,7 @@
       outline: none;
     }
 
-    input[type="number"]:focus { border-color: var(--primary); }
+    input[type="number"]:focus, select:focus { border-color: var(--primary); }
 
     .segmented {
       display: flex;
@@ -156,10 +162,10 @@
 
     .segmented button {
       flex: 1;
-      padding: 8px;
+      padding: 6px 8px;
       border: none;
       background: none;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--text-muted);
       border-radius: 6px;
@@ -247,6 +253,23 @@
 
     .action-btn:active { background: var(--primary-dark); }
 
+    .secondary-btn {
+      width: 100%;
+      padding: 12px;
+      background: #f8fafc;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
     .exchange-item {
       display: flex;
       align-items: center;
@@ -277,66 +300,122 @@
       cursor: pointer;
     }
     .step-btn:active { background: var(--border); }
-    .step-value { font-size: 1.05rem; font-weight: 700; min-width: 24px; text-align: center; }
+    .step-value { font-size: 1.05rem; font-weight: 700; min-width: 34px; text-align: center; }
 
+    /* KAYDIRILABİLİR ALT ÇUBUK (SWIPEABLE BOTTOM BAR) */
     .sticky-footer {
       position: sticky;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-top: 1px solid var(--border);
-      padding: 12px 16px;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+      padding: 8px 0 10px 0;
+      box-shadow: 0 -4px 14px rgba(0,0,0,0.08);
       z-index: 40;
     }
 
-    .footer-content { max-width: 600px; margin: 0 auto; }
+    .carousel-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .carousel-container::-webkit-scrollbar { display: none; }
+
+    .carousel-card {
+      flex: 0 0 100%;
+      min-width: 100%;
+      scroll-snap-align: start;
+      padding: 0 16px;
+      box-sizing: border-box;
+    }
+
+    .pagination-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      width: 16px;
+      border-radius: 3px;
+    }
+
     .energy-progress-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
-    .live-total-kcal { font-size: 1.2rem; font-weight: 800; color: var(--text); }
+    .live-total-kcal { font-size: 1.15rem; font-weight: 800; color: var(--text); }
     .live-target-kcal { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
-    .live-delta { font-size: 0.85rem; font-weight: 700; }
+    .live-delta { font-size: 0.82rem; font-weight: 700; }
     .delta-neg { color: #2563eb; }
     .delta-pos { color: var(--danger); }
     .delta-zero { color: var(--success); }
 
-    .macro-bar-container {
+    .progress-bar-container {
       display: flex;
       height: 6px;
       background: #e2e8f0;
       border-radius: 3px;
       overflow: hidden;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .macro-bar-cho { background: #3b82f6; transition: width 0.2s; }
     .macro-bar-pro { background: #ef4444; transition: width 0.2s; }
     .macro-bar-fat { background: #f59e0b; transition: width 0.2s; }
 
-    .macro-summary-grid {
+    .fiber-bar-sol { background: #10b981; transition: width 0.2s; }
+    .fiber-bar-insol { background: #84cc16; transition: width 0.2s; }
+
+    .summary-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 6px;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
     }
 
-    .macro-box {
+    .summary-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      text-align: center;
+      font-size: 0.72rem;
+    }
+
+    .mini-box {
       background: #f8fafc;
-      padding: 4px;
+      padding: 4px 6px;
       border-radius: 6px;
       border: 1px solid #f1f5f9;
     }
-    .macro-box strong { display: block; font-size: 0.85rem; color: var(--text); }
-    .macro-box.cho { border-left: 3px solid #3b82f6; }
-    .macro-box.pro { border-left: 3px solid #ef4444; }
-    .macro-box.fat { border-left: 3px solid #f59e0b; }
+    .mini-box strong { display: block; font-size: 0.82rem; color: var(--text); }
+    .mini-box.cho { border-left: 3px solid #3b82f6; }
+    .mini-box.pro { border-left: 3px solid #ef4444; }
+    .mini-box.fat { border-left: 3px solid #f59e0b; }
+    .mini-box.ca { border-left: 3px solid #0d9488; }
+    .mini-box.p { border-left: 3px solid #8b5cf6; }
   </style>
 </head>
 <body>
@@ -412,6 +491,21 @@
           <div id="box-realistic-target" style="display: none; margin-top: 8px; padding: 6px 10px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; font-size: 0.78rem; color: #166534;">
             🎯 <strong>İlk Klinik Hedef (%5-10 Kayıp):</strong> <span id="res-realistic-range">64.8 - 68.4 kg</span> <small>(3-6 Ay)</small>
           </div>
+
+          <!-- Sıvı ve Posa Emniyet Aralığı -->
+          <div class="grid-2" style="margin-top: 10px; padding-top: 8px; border-top: 1px solid #f1f5f9;">
+            <div style="background: #f8fafc; padding: 8px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.75rem;">
+              <span style="color: var(--text-muted); display: block;">💧 Günlük Sıvı İhtiyacı:</span>
+              <strong id="res-fluid" style="color: var(--primary-dark); font-size: 0.85rem;">2.1 - 2.5 L/gün</strong>
+              <small style="display: block; color: #94a3b8;">(30-35 ml/kg)</small>
+            </div>
+            <div style="background: #f8fafc; padding: 8px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.75rem;">
+              <span style="color: var(--text-muted); display: block;">🌾 Diyet Posası Hedefi:</span>
+              <strong id="res-fiber" style="color: var(--primary-dark); font-size: 0.85rem;">25 - 35 g/gün</strong>
+              <small style="display: block; color: #94a3b8;">(Asgari: 14g/1000kcal | Üst: &lt;50g)</small>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -480,7 +574,7 @@
           <div id="alert-bmr-floor" class="alert-box alert-warning" style="display: none;">
             <strong>⚠️ Güvenlik Uyarısı: BMR / Asgari Taban İhlali!</strong><br>
             <span id="alert-bmr-text">Hedef kalori danışanın bazal metabolizmasının veya cinsiyet tabanının altındadır.</span><br>
-            <small>• Kas kaybı, tiroid yavaşlaması ve adaptif termogenezi önlemek için <strong>"-300 kcal (Hafif Açık)"</strong> seçilmesi veya açığın yürüyüş/egzersizle oluşturulması önerilir.</small>
+            <small>• Kas kaybı ve adaptif termogenezi önlemek için <strong>"-300 kcal (Hafif Açık)"</strong> seçilmesi veya açığın yürüyüş/egzersizle oluşturulması önerilir.</small>
           </div>
 
           <button class="action-btn" onclick="transferTargetToExchanges()">
@@ -507,6 +601,20 @@
           <div id="alert-geriatric" class="alert-box alert-warning" style="display: none;">
             <strong>👴 Geriatrik Aralık (≥ 65 Yaş)</strong><br>
             ESPEN ve TÜBER 2022'ye göre sağlıklı geriatrik hedef aralık 22.0 - 27.0 kg/m²'dir.
+          </div>
+
+          <!-- Ateş & Metabolik Stres Seçimi -->
+          <div style="margin-top: 10px; padding: 10px; background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px;">
+            <label style="color: #92400e;">Vücut Sıcaklığı / Ateş Faktörü:</label>
+            <select id="sel-fever" onchange="calculateEnergy()" style="padding: 6px 10px; font-size: 0.85rem; border-color: #fde68a;">
+              <option value="0">Normal (≤ 37.0°C) - Ekstra Stres Yok</option>
+              <option value="0.10">Hafif Ateş (38.0°C) [+%10 Metabolik Artış]</option>
+              <option value="0.20">Orta Ateş (39.0°C) [+%20 Metabolik Artış]</option>
+              <option value="0.30">Yüksek Ateş (≥ 40.0°C) [+%30 Metabolik Artış]</option>
+            </select>
+            <small style="display: block; color: #b45309; margin-top: 4px; font-size: 0.72rem;">
+              *Aşırı besleme (overfeeding) koruması gereği ateş çarpanı dozu 35 kcal/kg tavan sınırının üzerine çıkarmaz.
+            </small>
           </div>
 
           <label style="margin-top: 12px;">Doz Seçimi (kcal / kg / gün)</label>
@@ -546,7 +654,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
             <label style="margin-bottom: 2px;">Hedef Enerji (kcal)</label>
-            <input type="number" id="inp-target-kcal" value="1987" style="width: 140px; padding: 6px 10px; font-size: 1.1rem;" oninput="updateSummary()">
+            <input type="number" id="inp-target-kcal" value="1987" style="width: 130px; padding: 6px 10px; font-size: 1.05rem;" oninput="updateSummary()">
           </div>
           <button onclick="resetExchanges()" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: #fff; font-size: 0.75rem; font-weight: 600; color: var(--danger); cursor: pointer;">
             Sıfırla
@@ -555,63 +663,138 @@
       </div>
 
       <div class="card">
-        <div class="card-title">Besin Grubu Porsiyonları (11 Grup)</div>
+        <div class="card-title" style="flex-wrap: wrap; gap: 8px;">
+          <span>Besin Grubu Porsiyonları (11 Grup)</span>
+          <!-- Global Adım Seçici: 1.0 vs 0.5 -->
+          <div class="segmented" style="width: 160px;">
+            <button id="btn-step-1" class="active" onclick="setStepIncrement(1.0)">1.0 (Tam)</button>
+            <button id="btn-step-05" onclick="setStepIncrement(0.5)">0.5 (Yarım)</button>
+          </div>
+        </div>
         <div id="exchange-list-container"></div>
+
+        <!-- Danışan Reçetesi Kopyalama Butonu -->
+        <button class="secondary-btn" id="btn-copy-summary" onclick="copyDietSummary()">
+          📋 Danışan Diyet Özetini Kopyala
+        </button>
       </div>
 
-      <div style="height: 120px;"></div>
+      <div style="height: 140px;"></div>
     </div>
   </main>
 
-  <!-- CANLI SABİT ALT BAR -->
+  <!-- CANLI SABİT ALT BAR (KAYDIRILABİLİR 3 KARTLI KOKPİT) -->
   <div id="sticky-bar" class="sticky-footer" style="display: none;">
-    <div class="footer-content">
-      <div class="energy-progress-row">
-        <div>
-          <span class="live-total-kcal" id="lbl-total-kcal">0</span>
-          <span class="live-target-kcal"> / <span id="lbl-target-kcal">1987</span> kcal</span>
+    <div class="carousel-container" id="bottom-carousel" onscroll="handleCarouselScroll()">
+      
+      <!-- KART 1: ENERJİ & MAKRO KOKPİTİ -->
+      <div class="carousel-card">
+        <div class="energy-progress-row">
+          <div>
+            <span class="live-total-kcal" id="lbl-total-kcal">0</span>
+            <span class="live-target-kcal"> / <span id="lbl-target-kcal">1987</span> kcal</span>
+          </div>
+          <div class="live-delta" id="lbl-delta-kcal">0 kcal</div>
         </div>
-        <div class="live-delta" id="lbl-delta-kcal">0 kcal</div>
+
+        <div class="progress-bar-container">
+          <div id="bar-cho" class="macro-bar-cho" style="width: 0%;"></div>
+          <div id="bar-pro" class="macro-bar-pro" style="width: 0%;"></div>
+          <div id="bar-fat" class="macro-bar-fat" style="width: 0%;"></div>
+        </div>
+
+        <div class="summary-grid-3">
+          <div class="mini-box cho">
+            <span>CHO</span>
+            <strong id="lbl-cho-sum">0g (%0)</strong>
+          </div>
+          <div class="mini-box pro">
+            <span>PRO</span>
+            <strong id="lbl-pro-sum">0g (%0)</strong>
+            <span id="lbl-pro-gkg" style="font-size: 0.65rem; color: var(--text-muted);">-</span>
+          </div>
+          <div class="mini-box fat">
+            <span>YAĞ</span>
+            <strong id="lbl-fat-sum">0g (%0)</strong>
+          </div>
+        </div>
       </div>
 
-      <div class="macro-bar-container">
-        <div id="bar-cho" class="macro-bar-cho" style="width: 0%;"></div>
-        <div id="bar-pro" class="macro-bar-pro" style="width: 0%;"></div>
-        <div id="bar-fat" class="macro-bar-fat" style="width: 0%;"></div>
+      <!-- KART 2: POSA (LİF) & MİKROBİYOTA KOKPİTİ -->
+      <div class="carousel-card">
+        <div class="energy-progress-row">
+          <div>
+            <span style="font-size: 0.85rem; font-weight: 700; color: var(--text);">🌾 Diyet Posası: </span>
+            <strong id="lbl-total-fiber" style="font-size: 1.1rem; color: var(--primary-dark);">0 g</strong>
+            <span class="live-target-kcal" id="lbl-fiber-goal"> / ~28 g</span>
+          </div>
+          <div id="lbl-fiber-alert" style="font-size: 0.72rem; font-weight: 700; color: var(--success);">Dengeli</div>
+        </div>
+
+        <div class="progress-bar-container">
+          <div id="bar-sol-fiber" class="fiber-bar-sol" style="width: 0%;" title="Çözünür Posa"></div>
+          <div id="bar-insol-fiber" class="fiber-bar-insol" style="width: 0%;" title="Çözünmez Posa"></div>
+        </div>
+
+        <div class="summary-grid-2">
+          <div class="mini-box" style="border-left: 3px solid #10b981;">
+            <span>Çözünür (Fermente)</span>
+            <strong id="lbl-sol-fiber">0 g (%0)</strong>
+          </div>
+          <div class="mini-box" style="border-left: 3px solid #84cc16;">
+            <span>Çözünmez (Posasal)</span>
+            <strong id="lbl-insol-fiber">0 g (%0)</strong>
+          </div>
+        </div>
       </div>
 
-      <div class="macro-summary-grid">
-        <div class="macro-box cho">
-          <span>CHO</span>
-          <strong id="lbl-cho-sum">0g (%0)</strong>
+      <!-- KART 3: KLİNİK MİNERAL PANELİ (KALSİYUM & FOSFOR) -->
+      <div class="carousel-card">
+        <div class="energy-progress-row">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text);">🔬 Mineral & Elektrolit Yükü</span>
+          <span id="lbl-renal-alert" style="font-size: 0.72rem; font-weight: 700; color: var(--success);">Güvenli</span>
         </div>
-        <div class="macro-box pro">
-          <span>PRO</span>
-          <strong id="lbl-pro-sum">0g (%0)</strong>
-          <span id="lbl-pro-gkg" style="font-size: 0.65rem; color: var(--text-muted);">-</span>
-        </div>
-        <div class="macro-box fat">
-          <span>YAĞ</span>
-          <strong id="lbl-fat-sum">0g (%0)</strong>
+
+        <div style="height: 6px;"></div>
+
+        <div class="summary-grid-2">
+          <div class="mini-box ca">
+            <span style="font-size: 0.7rem; color: var(--text-muted);">Kalsiyum (Kemik)</span>
+            <strong id="lbl-ca-sum">0 mg</strong>
+            <span style="font-size: 0.65rem; color: var(--text-muted);" id="lbl-ca-target">Ref: 1000 mg</span>
+          </div>
+          <div class="mini-box p">
+            <span style="font-size: 0.7rem; color: var(--text-muted);">Fosfor (Renal Eşik)</span>
+            <strong id="lbl-p-sum">0 mg</strong>
+            <span style="font-size: 0.65rem; color: var(--text-muted);">Tavan: &lt;1000 mg</span>
+          </div>
         </div>
       </div>
+
+    </div>
+
+    <!-- SAYFALAMA NOKTALARI (PAGINATION DOTS) -->
+    <div class="pagination-dots">
+      <div class="dot active" id="dot-0"></div>
+      <div class="dot" id="dot-1"></div>
+      <div class="dot" id="dot-2"></div>
     </div>
   </div>
 
   <script>
-    // 11 GRUPLU GELİŞMİŞ DEĞİŞİM VERİTABANI
+    // 11 GRUPLU VE BİLİMSEL MİNERAL/POSA KATSAYILI DEĞİŞİM VERİTABANI
     const EXCHANGES = [
-      { id: 'sut_tam', name: 'Süt (Tam Yağlı)', sub: '1 sb (200 ml) süt, yoğurt, kefir', cho: 6, pro: 6, fat: 6, kcal: 102, count: 0 },
-      { id: 'sut_yarim', name: 'Süt (Yarım Yağlı/Yağsız)', sub: '1 sb (200 ml) light süt, ayran', cho: 6, pro: 6, fat: 3, kcal: 75, count: 0 },
-      { id: 'et_az', name: 'Et (Az Yağlı / Tavuk Göğsü / Lor)', sub: '30g tavuk/hindi göğsü, yağsız balık, 2 yk lor', cho: 0, pro: 6, fat: 2, kcal: 42, count: 0 },
-      { id: 'et_orta', name: 'Et (Orta Yağlı / Yumurta / Peynir)', sub: '30g dana eti/köfte, 1 tam yumurta, 30g beyaz peynir', cho: 0, pro: 6, fat: 5, kcal: 69, count: 0 },
-      { id: 'kbl', name: 'Kurubaklagil (KBL)', sub: '4 yk pişmiş (25-30g kuru)', cho: 15, pro: 6, fat: 1, kcal: 93, count: 0 },
-      { id: 'eyg', name: 'Ekmek ve Tahıl (EYG)', sub: '1 dilim ekmek, 2-3 yk pilav (Patates/Mısır dahil)*', cho: 15, pro: 2, fat: 0, kcal: 68, count: 0 },
-      { id: 'sebze', name: 'Sebze Grubu', sub: '4 yk pişmiş sebze, 1 kase çiğ salata', cho: 6, pro: 1, fat: 0, kcal: 28, count: 0 },
-      { id: 'meyve', name: 'Meyve Grubu', sub: '1 orta boy taze meyve', cho: 15, pro: 0, fat: 0, kcal: 60, count: 0 },
-      { id: 'yag', name: 'Yağ Grubu', sub: '1 tk zeytinyağı, 5 zeytin, 2 ceviz', cho: 0, pro: 0, fat: 5, kcal: 45, count: 0 },
-      { id: 'pelte', name: 'Pelte (Nişasta)', sub: '1 yk nişasta (saf karbonhidrat)', cho: 15, pro: 0, fat: 0, kcal: 60, count: 0 },
-      { id: 'seker', name: 'Basit Şeker / Bal', sub: '1 tk bal/reçel, 2 küp şeker', cho: 5, pro: 0, fat: 0, kcal: 20, count: 0 }
+      { id: 'sut_tam', name: 'Süt (Tam Yağlı)', sub: '1 sb (200 ml) süt, yoğurt, kefir', cho: 6, pro: 6, fat: 6, kcal: 102, fiber: 0, sol: 0, insol: 0, ca: 240, p: 200, count: 0 },
+      { id: 'sut_yarim', name: 'Süt (Yarım Yağlı/Yağsız)', sub: '1 sb (200 ml) light süt, ayran', cho: 6, pro: 6, fat: 3, kcal: 75, fiber: 0, sol: 0, insol: 0, ca: 240, p: 200, count: 0 },
+      { id: 'et_az', name: 'Et (Az Yağlı / Tavuk Göğsü / Lor)', sub: '30g tavuk/hindi göğsü, yağsız balık, 2 yk lor', cho: 0, pro: 6, fat: 2, kcal: 42, fiber: 0, sol: 0, insol: 0, ca: 15, p: 65, count: 0 },
+      { id: 'et_orta', name: 'Et (Orta Yağlı / Yumurta / Peynir)', sub: '30g dana eti/köfte, 1 tam yumurta, 30g beyaz peynir', cho: 0, pro: 6, fat: 5, kcal: 69, fiber: 0, sol: 0, insol: 0, ca: 25, p: 60, count: 0 },
+      { id: 'kbl', name: 'Kurubaklagil (KBL)', sub: '4 yk pişmiş (25-30g kuru)', cho: 15, pro: 6, fat: 1, kcal: 93, fiber: 6.0, sol: 2.5, insol: 3.5, ca: 40, p: 120, count: 0 },
+      { id: 'eyg', name: 'Ekmek ve Tahıl (EYG)', sub: '1 dilim ekmek, 2-3 yk pilav (Patates/Mısır dahil)*', cho: 15, pro: 2, fat: 0, kcal: 68, fiber: 2.0, sol: 0.6, insol: 1.4, ca: 10, p: 35, count: 0 },
+      { id: 'sebze', name: 'Sebze Grubu', sub: '4 yk pişmiş sebze, 1 kase çiğ salata', cho: 6, pro: 1, fat: 0, kcal: 28, fiber: 2.5, sol: 0.8, insol: 1.7, ca: 35, p: 25, count: 0 },
+      { id: 'meyve', name: 'Meyve Grubu', sub: '1 orta boy taze meyve', cho: 15, pro: 0, fat: 0, kcal: 60, fiber: 2.5, sol: 1.5, insol: 1.0, ca: 15, p: 15, count: 0 },
+      { id: 'yag', name: 'Yağ Grubu', sub: '1 tk zeytinyağı, 5 zeytin, 2 ceviz', cho: 0, pro: 0, fat: 5, kcal: 45, fiber: 0, sol: 0, insol: 0, ca: 0, p: 0, count: 0 },
+      { id: 'pelte', name: 'Pelte (Nişasta)', sub: '1 yk nişasta (saf karbonhidrat)', cho: 15, pro: 0, fat: 0, kcal: 60, fiber: 0, sol: 0, insol: 0, ca: 0, p: 0, count: 0 },
+      { id: 'seker', name: 'Basit Şeker / Bal', sub: '1 tk bal/reçel, 2 küp şeker', cho: 5, pro: 0, fat: 0, kcal: 20, fiber: 0, sol: 0, insol: 0, ca: 0, p: 0, count: 0 }
     ];
 
     let state = {
@@ -620,11 +803,14 @@
       pal: 1.375,
       targetDelta: 0,
       refStandard: 'who',
+      stepIncrement: 1.0, // Varsayılan 1.0; 0.5 yapılabilir
       clinicalMinDose: 25,
       clinicalMaxDose: 30,
       calculatedBMR: 0,
       calculatedTEE: 0,
       currentWeight: 72,
+      currentHeight: 165,
+      currentAge: 28,
       currentIBW: 59.9,
       currentBMI: 26.4,
       clinicalMidKcal: 1980
@@ -688,6 +874,12 @@
       calculateEnergy();
     }
 
+    function setStepIncrement(inc) {
+      state.stepIncrement = inc;
+      document.getElementById('btn-step-1').classList.toggle('active', inc === 1.0);
+      document.getElementById('btn-step-05').classList.toggle('active', inc === 0.5);
+    }
+
     function setClinicalDose(min, max, elem) {
       state.clinicalMinDose = min;
       state.clinicalMaxDose = max;
@@ -724,6 +916,8 @@
       const diffKg = weight - ibw;
 
       state.currentWeight = weight;
+      state.currentHeight = height;
+      state.currentAge = age;
       state.currentIBW = ibw;
       state.currentBMI = bmi;
 
@@ -758,6 +952,11 @@
         realisticBox.style.display = 'none';
       }
 
+      // Sıvı İhtiyacı Hesabı
+      const fluidMin = ((weight * 30) / 1000).toFixed(1);
+      const fluidMax = ((weight * 35) / 1000).toFixed(1);
+      document.getElementById('res-fluid').innerText = `${fluidMin} - ${fluidMax} L/gün`;
+
       // Poliklinik BMR Hesabı (Mifflin-St Jeor)
       let bmr = 0;
       if (state.gender === 'erkek') {
@@ -790,11 +989,13 @@
         alertBmrFloor.style.display = 'none';
       }
 
-      // Klinik Mod Uyarıları
+      // Klinik Mod Uyarıları ve Ateş Faktörü
       const isGeriatric = (age >= 65);
       document.getElementById('alert-refeeding').style.display = (bmi < 18.5) ? 'block' : 'none';
       document.getElementById('alert-obesity').style.display = (bmi >= 30.0) ? 'block' : 'none';
       document.getElementById('alert-geriatric').style.display = isGeriatric ? 'block' : 'none';
+
+      const feverFactor = parseFloat(document.getElementById('sel-fever').value) || 0;
 
       let clinMin = 0, clinMax = 0, clinNote = "";
       if (bmi < 18.5) {
@@ -806,9 +1007,17 @@
         clinMax = Math.round(ibw * 25);
         clinNote = "Aşırı besleme önlemi: İdeal Ağırlık (İVA) x 22-25 kcal baz alınmıştır.";
       } else {
-        clinMin = Math.round(weight * state.clinicalMinDose);
-        clinMax = Math.round(weight * state.clinicalMaxDose);
-        clinNote = `Aktüel ağırlık (${weight} kg) x ${state.clinicalMinDose}-${state.clinicalMaxDose} kcal baz alınmıştır.`;
+        let baseMin = state.clinicalMinDose;
+        let baseMax = state.clinicalMaxDose;
+
+        if (feverFactor > 0) {
+          baseMin = Math.min(32, Math.round(baseMin * (1 + feverFactor)));
+          baseMax = Math.min(35, Math.round(baseMax * (1 + feverFactor)));
+        }
+
+        clinMin = Math.round(weight * baseMin);
+        clinMax = Math.round(weight * baseMax);
+        clinNote = `Aktüel ağırlık (${weight} kg) x ${baseMin}-${baseMax} kcal ${feverFactor > 0 ? '(Ateş faktörü eklendi, tavan korumalı)' : ''}`;
       }
 
       state.clinicalMidKcal = Math.round((clinMin + clinMax) / 2);
@@ -851,17 +1060,21 @@
       });
     }
 
-    function stepExchange(id, delta) {
+    function stepExchange(id, direction) {
       const ex = EXCHANGES.find(e => e.id === id);
       if (!ex) return;
-      if (ex.count + delta >= 0) {
-        ex.count += delta;
-        document.getElementById(`val-${id}`).innerText = ex.count;
+      
+      const delta = direction * state.stepIncrement;
+      let newCount = ex.count + delta;
+      
+      if (newCount >= 0) {
+        ex.count = Math.round(newCount * 10) / 10;
+        document.getElementById(`val-${id}`).innerText = (ex.count % 1 === 0) ? ex.count : ex.count.toFixed(1);
         
-        const rowKcal = ex.count * ex.kcal;
-        const rowCho = ex.count * ex.cho;
-        const rowPro = ex.count * ex.pro;
-        const rowFat = ex.count * ex.fat;
+        const rowKcal = Math.round(ex.count * ex.kcal);
+        const rowCho = Math.round(ex.count * ex.cho * 10) / 10;
+        const rowPro = Math.round(ex.count * ex.pro * 10) / 10;
+        const rowFat = Math.round(ex.count * ex.fat * 10) / 10;
 
         document.getElementById(`live-row-${id}`).innerText = 
           `${ex.count} Porsiyon = ${rowKcal} kcal (${rowCho}g C, ${rowPro}g P, ${rowFat}g Y)`;
@@ -873,26 +1086,50 @@
     function resetExchanges() {
       EXCHANGES.forEach(ex => {
         ex.count = 0;
-        document.getElementById(`val-${ex.id}`).innerText = 0;
+        document.getElementById(`val-${ex.id}`).innerText = '0';
         document.getElementById(`live-row-${ex.id}`).innerText = `0 Porsiyon = 0 kcal`;
       });
       updateSummary();
     }
 
-    // --- CANLI ÖZET VE HESAPLAMA MOTORU ---
+    // --- CAROUSEL KAYDIRMA DİNLEYİCİSİ ---
+    function handleCarouselScroll() {
+      const carousel = document.getElementById('bottom-carousel');
+      const scrollPos = carousel.scrollLeft;
+      const cardWidth = carousel.clientWidth;
+      const activeIdx = Math.round(scrollPos / cardWidth);
+
+      for (let i = 0; i < 3; i++) {
+        document.getElementById(`dot-${i}`).classList.toggle('active', i === activeIdx);
+      }
+    }
+
+    // --- CANLI ÖZET VE ÇOKLU KOKPİT MOTORU ---
     function updateSummary() {
-      let totalKcal = 0;
-      let totalCho = 0;
-      let totalPro = 0;
-      let totalFat = 0;
+      let totalKcal = 0, totalCho = 0, totalPro = 0, totalFat = 0;
+      let totalFiber = 0, totalSolFiber = 0, totalInsolFiber = 0;
+      let totalCa = 0, totalP = 0;
 
       EXCHANGES.forEach(ex => {
         totalKcal += ex.count * ex.kcal;
         totalCho += ex.count * ex.cho;
         totalPro += ex.count * ex.pro;
         totalFat += ex.count * ex.fat;
+
+        totalFiber += ex.count * ex.fiber;
+        totalSolFiber += ex.count * ex.sol;
+        totalInsolFiber += ex.count * ex.insol;
+
+        totalCa += ex.count * ex.ca;
+        totalP += ex.count * ex.p;
       });
 
+      totalKcal = Math.round(totalKcal);
+      totalCho = Math.round(totalCho);
+      totalPro = Math.round(totalPro);
+      totalFat = Math.round(totalFat);
+
+      // --- KART 1: ENERJİ & MAKRO ---
       const targetKcal = parseFloat(document.getElementById('inp-target-kcal').value) || 0;
       const deltaKcal = totalKcal - targetKcal;
 
@@ -926,7 +1163,6 @@
       document.getElementById('lbl-pro-sum').innerText = `${totalPro}g (%${proPct})`;
       document.getElementById('lbl-fat-sum').innerText = `${totalFat}g (%${fatPct})`;
 
-      // Protein g/kg: Obezite İkili Göstergesi (Aktüel vs İdeal)
       const gKgEl = document.getElementById('lbl-pro-gkg');
       if (state.currentWeight > 0 && totalPro > 0) {
         const actGkg = (totalPro / state.currentWeight).toFixed(2);
@@ -939,6 +1175,120 @@
       } else {
         gKgEl.innerText = '-';
       }
+
+      // --- KART 2: POSA & MİKROBİYOTA ---
+      totalFiber = Math.round(totalFiber * 10) / 10;
+      totalSolFiber = Math.round(totalSolFiber * 10) / 10;
+      totalInsolFiber = Math.round(totalInsolFiber * 10) / 10;
+
+      const fiberGoal = Math.round((targetKcal / 1000) * 14);
+      document.getElementById('lbl-total-fiber').innerText = `${totalFiber} g`;
+      document.getElementById('lbl-fiber-goal').innerText = ` / ~${fiberGoal} g`;
+
+      let solPct = 0, insolPct = 0;
+      if (totalFiber > 0) {
+        solPct = Math.round((totalSolFiber / totalFiber) * 100);
+        insolPct = 100 - solPct;
+      }
+      document.getElementById('bar-sol-fiber').style.width = solPct + '%';
+      document.getElementById('bar-insol-fiber').style.width = insolPct + '%';
+
+      document.getElementById('lbl-sol-fiber').innerText = `${totalSolFiber}g (%${solPct})`;
+      document.getElementById('lbl-insol-fiber').innerText = `${totalInsolFiber}g (%${insolPct})`;
+
+      const fiberAlertEl = document.getElementById('lbl-fiber-alert');
+      if (totalFiber > 50) {
+        fiberAlertEl.style.color = 'var(--danger)';
+        fiberAlertEl.innerText = '⚠️ >50g: Mineral Riski!';
+      } else if (totalFiber >= fiberGoal && fiberGoal > 0) {
+        fiberAlertEl.style.color = 'var(--success)';
+        fiberAlertEl.innerText = '✓ Hedef Karşılandı';
+      } else {
+        fiberAlertEl.style.color = 'var(--text-muted)';
+        fiberAlertEl.innerText = 'Asgari Altında';
+      }
+
+      // --- KART 3: KLİNİK MİNERAL PANELİ (Ca & P) ---
+      document.getElementById('lbl-ca-sum').innerText = `${Math.round(totalCa)} mg`;
+      document.getElementById('lbl-p-sum').innerText = `${Math.round(totalP)} mg`;
+
+      const caTarget = (state.currentAge >= 65 || (state.gender === 'kadin' && state.currentAge >= 50)) ? 1200 : 1000;
+      document.getElementById('lbl-ca-target').innerText = `Ref: ${caTarget} mg`;
+
+      const renalAlertEl = document.getElementById('lbl-renal-alert');
+      if (totalP > 1000) {
+        renalAlertEl.style.color = 'var(--danger)';
+        renalAlertEl.innerText = '⚠️ Fosfor > 1000mg!';
+      } else if (totalP > 800) {
+        renalAlertEl.style.color = 'var(--warning)';
+        renalAlertEl.innerText = 'Fosfor Sınırda';
+      } else {
+        renalAlertEl.style.color = 'var(--success)';
+        renalAlertEl.innerText = 'Renal Güvenli';
+      }
+    }
+
+    // --- TEK TIKLA DİYET ÖZETİ KOPYALAMA ---
+    function copyDietSummary() {
+      let totalKcal = 0, totalCho = 0, totalPro = 0, totalFat = 0;
+      let totalFiber = 0, totalCa = 0, totalP = 0;
+      let exchangeLines = [];
+
+      EXCHANGES.forEach(ex => {
+        if (ex.count > 0) {
+          totalKcal += ex.count * ex.kcal;
+          totalCho += ex.count * ex.cho;
+          totalPro += ex.count * ex.pro;
+          totalFat += ex.count * ex.fat;
+          totalFiber += ex.count * ex.fiber;
+          totalCa += ex.count * ex.ca;
+          totalP += ex.count * ex.p;
+          exchangeLines.push(`• ${ex.name}: ${ex.count} porsiyon`);
+        }
+      });
+
+      totalKcal = Math.round(totalKcal);
+      totalCho = Math.round(totalCho);
+      totalPro = Math.round(totalPro);
+      totalFat = Math.round(totalFat);
+
+      const targetKcal = document.getElementById('inp-target-kcal').value;
+      const choPct = totalKcal > 0 ? Math.round(((totalCho * 4) / totalKcal) * 100) : 0;
+      const proPct = totalKcal > 0 ? Math.round(((totalPro * 4) / totalKcal) * 100) : 0;
+      const fatPct = totalKcal > 0 ? Math.round(((totalFat * 9) / totalKcal) * 100) : 0;
+      const proGkg = (state.currentWeight > 0 && totalPro > 0) ? (totalPro / state.currentWeight).toFixed(2) : '-';
+
+      const fluidMin = ((state.currentWeight * 30) / 1000).toFixed(1);
+      const fluidMax = ((state.currentWeight * 35) / 1000).toFixed(1);
+
+      let summaryText = `📋 KLİNİK BESLENME & DİYET PLANI ÖZETİ\n` +
+        `-----------------------------------------\n` +
+        `Danışan: ${state.gender === 'kadin' ? 'Kadın' : 'Erkek'}, ${state.currentAge} Yaş | Boy: ${state.currentHeight} cm | Ağırlık: ${state.currentWeight} kg\n` +
+        `BKİ: ${state.currentBMI.toFixed(1)} kg/m² | İdeal Ağırlık: ${state.currentIBW.toFixed(1)} kg\n` +
+        `Günlük Sıvı: ${fluidMin} - ${fluidMax} L | Diyet Posası: ${totalFiber.toFixed(1)} g\n` +
+        `Mineraller: Ca: ${Math.round(totalCa)} mg | Fosfor: ${Math.round(totalP)} mg\n` +
+        `-----------------------------------------\n` +
+        `Hedef Enerji: ${targetKcal} kcal | Planlanan: ${totalKcal} kcal\n` +
+        `Makro Dağılımı: CHO: ${totalCho}g (%${choPct}) | PRO: ${totalPro}g (%${proPct} - ${proGkg} g/kg) | YAĞ: ${totalFat}g (%${fatPct})\n` +
+        `-----------------------------------------\n` +
+        `GÜNLÜK BESİN DEĞİŞİM DAĞILIMI:\n` +
+        (exchangeLines.length > 0 ? exchangeLines.join('\n') : '• Henüz porsiyon girilmedi.') +
+        `\n-----------------------------------------`;
+
+      navigator.clipboard.writeText(summaryText).then(() => {
+        const btn = document.getElementById('btn-copy-summary');
+        const origText = btn.innerText;
+        btn.innerText = '✓ Panoya Kopyalandı!';
+        btn.style.borderColor = 'var(--success)';
+        btn.style.color = 'var(--success)';
+        setTimeout(() => {
+          btn.innerText = origText;
+          btn.style.borderColor = 'var(--primary)';
+          btn.style.color = 'var(--primary-dark)';
+        }, 2000);
+      }).catch(() => {
+        alert('Kopyalama başarısız oldu, lütfen manuel kopyalayınız.');
+      });
     }
   </script>
 </body>

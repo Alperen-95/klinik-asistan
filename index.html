@@ -302,7 +302,7 @@
     .step-btn:active { background: var(--border); }
     .step-value { font-size: 1.05rem; font-weight: 700; min-width: 34px; text-align: center; }
 
-    /* KAYDIRILABİLİR ALT ÇUBUK (SWIPEABLE BOTTOM BAR) */
+    /* KAYDIRILABİLİR ALT ÇUBUK (SWIPEABLE 3 KART) */
     .sticky-footer {
       position: sticky;
       bottom: 0;
@@ -387,6 +387,8 @@
 
     .fiber-bar-sol { background: #10b981; transition: width 0.2s; }
     .fiber-bar-insol { background: #84cc16; transition: width 0.2s; }
+
+    .cap-bar-fill { height: 100%; transition: width 0.3s, background-color 0.3s; }
 
     .summary-grid-3 {
       display: grid;
@@ -487,7 +489,7 @@
             İdeal Referans: <strong id="res-ref-bmi">22.0</strong> | İdeal Kilo: <strong id="res-ibw">59.9</strong> kg (<span id="res-weight-diff">+12.1 kg</span>)
           </div>
 
-          <!-- Gerçekçi İlk Hedef Rozeti (Sadece BKİ >= 25 ise açılır) -->
+          <!-- Gerçekçi İlk Hedef Rozeti (BKİ >= 25 ise açılır) -->
           <div id="box-realistic-target" style="display: none; margin-top: 8px; padding: 6px 10px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; font-size: 0.78rem; color: #166534;">
             🎯 <strong>İlk Klinik Hedef (%5-10 Kayıp):</strong> <span id="res-realistic-range">64.8 - 68.4 kg</span> <small>(3-6 Ay)</small>
           </div>
@@ -574,7 +576,7 @@
           <div id="alert-bmr-floor" class="alert-box alert-warning" style="display: none;">
             <strong>⚠️ Güvenlik Uyarısı: BMR / Asgari Taban İhlali!</strong><br>
             <span id="alert-bmr-text">Hedef kalori danışanın bazal metabolizmasının veya cinsiyet tabanının altındadır.</span><br>
-            <small>• Kas kaybı ve adaptif termogenezi önlemek için <strong>"-300 kcal (Hafif Açık)"</strong> seçilmesi veya açığın yürüyüş/egzersizle oluşturulması önerilir.</small>
+            <small>• Kas kaybı ve adaptif termogenezi önlemek için <strong>"-300 kcal (Hafif Açık)"</strong> seçilmesi veya açığın egzersizle oluşturulması önerilir.</small>
           </div>
 
           <button class="action-btn" onclick="transferTargetToExchanges()">
@@ -595,7 +597,7 @@
 
           <div id="alert-obesity" class="alert-box alert-warning" style="display: none;">
             <strong>⚠️ Obezite - Aşırı Besleme (Overfeeding) Koruması</strong><br>
-            ESPEN kılavuzları <strong>İdeal Kilo üzerinden 22-25 kcal/kg</strong> veya <strong>Aktüel Kilo üzerinden hipokalorik 11-14 kcal/kg</strong> önerir.
+            ESPEN kılavuzuna göre aşırı beslemeyi ve metabolik komplikasyonları önlemek için enerji <strong>İdeal Ağırlık (İVA) üzerinden 22 - 25 kcal/kg</strong> ile sınırlandırılmıştır.
           </div>
 
           <div id="alert-geriatric" class="alert-box alert-warning" style="display: none;">
@@ -613,12 +615,14 @@
               <option value="0.30">Yüksek Ateş (≥ 40.0°C) [+%30 Metabolik Artış]</option>
             </select>
             <small style="display: block; color: #b45309; margin-top: 4px; font-size: 0.72rem;">
-              *Aşırı besleme (overfeeding) koruması gereği ateş çarpanı dozu 35 kcal/kg tavan sınırının üzerine çıkarmaz.
+              *Aşırı besleme koruması gereği ateş çarpanı güvenli klinik tavan sınırını aşmaz.
             </small>
           </div>
 
-          <label style="margin-top: 12px;">Doz Seçimi (kcal / kg / gün)</label>
-          <div class="btn-group-grid" id="grid-clinical-doses">
+          <label id="lbl-clinical-dose-title" style="margin-top: 12px;">Doz Seçimi (kcal / kg / gün)</label>
+          
+          <!-- STANDART DOZ BUTONLARI (BKİ < 30) -->
+          <div class="btn-group-grid" id="grid-clinical-doses-std">
             <button class="select-btn" onclick="setClinicalDose(20, 25, this)">
               20 - 25 kcal/kg
               <small>Akut / Düşük stres</small>
@@ -630,6 +634,22 @@
             <button class="select-btn" onclick="setClinicalDose(30, 35, this)">
               30 - 35 kcal/kg
               <small>Ağır katabolizma / travma</small>
+            </button>
+          </div>
+
+          <!-- ESPEN OBEZİTE DOZ BUTONLARI (BKİ >= 30) -->
+          <div class="btn-group-grid" id="grid-clinical-doses-obese" style="display: none;">
+            <button class="select-btn" onclick="setObeseClinicalDose(22, 22, this)">
+              22 kcal/kg (İVA)
+              <small>Erken Dönem / Düşük Stres</small>
+            </button>
+            <button class="select-btn active" onclick="setObeseClinicalDose(22, 25, this)">
+              22 - 25 kcal/kg (İVA)
+              <small>Standart Hedef (Ort. 23.5)</small>
+            </button>
+            <button class="select-btn" onclick="setObeseClinicalDose(25, 25, this)">
+              25 kcal/kg (İVA)
+              <small>Katabolik / Ağır Stres Tavanı</small>
             </button>
           </div>
 
@@ -665,7 +685,6 @@
       <div class="card">
         <div class="card-title" style="flex-wrap: wrap; gap: 8px;">
           <span>Besin Grubu Porsiyonları (11 Grup)</span>
-          <!-- Global Adım Seçici: 1.0 vs 0.5 -->
           <div class="segmented" style="width: 160px;">
             <button id="btn-step-1" class="active" onclick="setStepIncrement(1.0)">1.0 (Tam)</button>
             <button id="btn-step-05" onclick="setStepIncrement(0.5)">0.5 (Yarım)</button>
@@ -673,7 +692,6 @@
         </div>
         <div id="exchange-list-container"></div>
 
-        <!-- Danışan Reçetesi Kopyalama Butonu -->
         <button class="secondary-btn" id="btn-copy-summary" onclick="copyDietSummary()">
           📋 Danışan Diyet Özetini Kopyala
         </button>
@@ -683,7 +701,7 @@
     </div>
   </main>
 
-  <!-- CANLI SABİT ALT BAR (KAYDIRILABİLİR 3 KARTLI KOKPİT) -->
+  <!-- CANLI SABİT ALT BAR (KAYDIRILABİLİR 3 KART) -->
   <div id="sticky-bar" class="sticky-footer" style="display: none;">
     <div class="carousel-container" id="bottom-carousel" onscroll="handleCarouselScroll()">
       
@@ -748,32 +766,63 @@
         </div>
       </div>
 
-      <!-- KART 3: KLİNİK MİNERAL PANELİ (KALSİYUM & FOSFOR) -->
+      <!-- KART 3: MİNERAL DENGESİ (POLİKLİNİK: Ca:P BAR / KLİNİK: FOSFOR ALARMI) -->
       <div class="carousel-card">
-        <div class="energy-progress-row">
-          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text);">🔬 Mineral & Elektrolit Yükü</span>
-          <span id="lbl-renal-alert" style="font-size: 0.72rem; font-weight: 700; color: var(--success);">Güvenli</span>
+        <!-- POLİKLİNİK GÖRÜNÜMÜ: Ca:P ORAN BARI -->
+        <div id="box-mineral-poli">
+          <div class="energy-progress-row">
+            <div>
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--text);">Ca:P Dengesi: </span>
+              <strong id="lbl-cap-ratio" style="font-size: 0.95rem; color: var(--primary-dark);">1 : 1.2</strong>
+            </div>
+            <span id="lbl-cap-status" class="badge badge-normal" style="font-size: 0.7rem; padding: 2px 6px;">İdeal (1:1-1.5)</span>
+          </div>
+
+          <div class="progress-bar-container" style="background: #e2e8f0;">
+            <div id="bar-cap-meter" class="cap-bar-fill" style="width: 50%; background: var(--success);"></div>
+          </div>
+
+          <div class="summary-grid-2">
+            <div class="mini-box ca">
+              <span>Kalsiyum (Ca)</span>
+              <strong id="lbl-ca-sum">0 mg</strong>
+              <span style="font-size: 0.65rem; color: var(--text-muted);" id="lbl-ca-target">Hedef: 1000 mg</span>
+            </div>
+            <div class="mini-box p">
+              <span>Fosfor (P)</span>
+              <strong id="lbl-p-sum">0 mg</strong>
+              <span style="font-size: 0.65rem; color: var(--text-muted);">İdeal Sınır: ≤ 1:2.0</span>
+            </div>
+          </div>
         </div>
 
-        <div style="height: 6px;"></div>
-
-        <div class="summary-grid-2">
-          <div class="mini-box ca">
-            <span style="font-size: 0.7rem; color: var(--text-muted);">Kalsiyum (Kemik)</span>
-            <strong id="lbl-ca-sum">0 mg</strong>
-            <span style="font-size: 0.65rem; color: var(--text-muted);" id="lbl-ca-target">Ref: 1000 mg</span>
+        <!-- KLİNİK GÖRÜNÜMÜ: RENAL FOSFOR ALARMI -->
+        <div id="box-mineral-klinik" style="display: none;">
+          <div class="energy-progress-row">
+            <span style="font-size: 0.85rem; font-weight: 700; color: var(--text);">🔬 Renal Mineral Panel</span>
+            <span id="lbl-renal-alert" style="font-size: 0.72rem; font-weight: 700; color: var(--success);">Renal Güvenli</span>
           </div>
-          <div class="mini-box p">
-            <span style="font-size: 0.7rem; color: var(--text-muted);">Fosfor (Renal Eşik)</span>
-            <strong id="lbl-p-sum">0 mg</strong>
-            <span style="font-size: 0.65rem; color: var(--text-muted);">Tavan: &lt;1000 mg</span>
+
+          <div style="height: 6px;"></div>
+
+          <div class="summary-grid-2">
+            <div class="mini-box ca">
+              <span>Kalsiyum (Ca)</span>
+              <strong id="lbl-ca-sum-k">0 mg</strong>
+              <span style="font-size: 0.65rem; color: var(--text-muted);" id="lbl-ca-target-k">Ref: 1000 mg</span>
+            </div>
+            <div class="mini-box p">
+              <span>Fosfor (Renal Eşik)</span>
+              <strong id="lbl-p-sum-k">0 mg</strong>
+              <span style="font-size: 0.65rem; color: var(--text-muted);">Tavan: &lt; 1000 mg</span>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- SAYFALAMA NOKTALARI (PAGINATION DOTS) -->
+    <!-- SAYFALAMA NOKTALARI -->
     <div class="pagination-dots">
       <div class="dot active" id="dot-0"></div>
       <div class="dot" id="dot-1"></div>
@@ -782,7 +831,6 @@
   </div>
 
   <script>
-    // 11 GRUPLU VE BİLİMSEL MİNERAL/POSA KATSAYILI DEĞİŞİM VERİTABANI
     const EXCHANGES = [
       { id: 'sut_tam', name: 'Süt (Tam Yağlı)', sub: '1 sb (200 ml) süt, yoğurt, kefir', cho: 6, pro: 6, fat: 6, kcal: 102, fiber: 0, sol: 0, insol: 0, ca: 240, p: 200, count: 0 },
       { id: 'sut_yarim', name: 'Süt (Yarım Yağlı/Yağsız)', sub: '1 sb (200 ml) light süt, ayran', cho: 6, pro: 6, fat: 3, kcal: 75, fiber: 0, sol: 0, insol: 0, ca: 240, p: 200, count: 0 },
@@ -803,9 +851,11 @@
       pal: 1.375,
       targetDelta: 0,
       refStandard: 'who',
-      stepIncrement: 1.0, // Varsayılan 1.0; 0.5 yapılabilir
+      stepIncrement: 1.0,
       clinicalMinDose: 25,
       clinicalMaxDose: 30,
+      obeseMinDose: 22,
+      obeseMaxDose: 25,
       calculatedBMR: 0,
       calculatedTEE: 0,
       currentWeight: 72,
@@ -850,7 +900,12 @@
       document.getElementById('btn-mod-klinik').classList.toggle('active', m === 'klinik');
       document.getElementById('view-poliklinik').style.display = (m === 'poliklinik') ? 'block' : 'none';
       document.getElementById('view-klinik').style.display = (m === 'klinik') ? 'block' : 'none';
+      
+      document.getElementById('box-mineral-poli').style.display = (m === 'poliklinik') ? 'block' : 'none';
+      document.getElementById('box-mineral-klinik').style.display = (m === 'klinik') ? 'block' : 'none';
+
       calculateEnergy();
+      updateSummary();
     }
 
     function setRefStandard(std) {
@@ -888,6 +943,14 @@
       calculateEnergy();
     }
 
+    function setObeseClinicalDose(min, max, elem) {
+      state.obeseMinDose = min;
+      state.obeseMaxDose = max;
+      elem.parentNode.querySelectorAll('.select-btn').forEach(b => b.classList.remove('active'));
+      elem.classList.add('active');
+      calculateEnergy();
+    }
+
     // --- ENERJİ VE ANTROPOMETRİ MOTORU ---
     function calculateEnergy() {
       let age = parseFloat(document.getElementById('inp-age').value) || 25;
@@ -899,7 +962,6 @@
       const heightM = height / 100.0;
       const bmi = weight / (heightM * heightM);
 
-      // İdeal BKİ Referansı Belirleme (WHO vs NRC 1989)
       let refBMI = 22.0;
       if (state.refStandard === 'who') {
         refBMI = (age >= 65) ? 24.0 : 22.0;
@@ -941,7 +1003,6 @@
         badge.innerText = 'Obezite';
       }
 
-      // Gerçekçi İlk Klinik Hedef (%5 - %10 Kayıp)
       const realisticBox = document.getElementById('box-realistic-target');
       if (bmi >= 25.0) {
         realisticBox.style.display = 'block';
@@ -952,12 +1013,10 @@
         realisticBox.style.display = 'none';
       }
 
-      // Sıvı İhtiyacı Hesabı
       const fluidMin = ((weight * 30) / 1000).toFixed(1);
       const fluidMax = ((weight * 35) / 1000).toFixed(1);
       document.getElementById('res-fluid').innerText = `${fluidMin} - ${fluidMax} L/gün`;
 
-      // Poliklinik BMR Hesabı (Mifflin-St Jeor)
       let bmr = 0;
       if (state.gender === 'erkek') {
         bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
@@ -974,7 +1033,6 @@
       document.getElementById('res-tee').innerText = state.calculatedTEE + ' kcal';
       document.getElementById('res-target-final').innerText = finalTarget;
 
-      // BMR ve Taban Kalori Güvenlik Denetimi
       const alertBmrFloor = document.getElementById('alert-bmr-floor');
       const alertBmrText = document.getElementById('alert-bmr-text');
       const minFloorKcal = (state.gender === 'kadin') ? 1200 : 1500;
@@ -989,11 +1047,28 @@
         alertBmrFloor.style.display = 'none';
       }
 
-      // Klinik Mod Uyarıları ve Ateş Faktörü
+      // KLİNİK MOD HESAPLAMALARI & BUTON GEÇİŞLERİ
       const isGeriatric = (age >= 65);
+      const isObese = (bmi >= 30.0);
+
       document.getElementById('alert-refeeding').style.display = (bmi < 18.5) ? 'block' : 'none';
-      document.getElementById('alert-obesity').style.display = (bmi >= 30.0) ? 'block' : 'none';
+      document.getElementById('alert-obesity').style.display = isObese ? 'block' : 'none';
       document.getElementById('alert-geriatric').style.display = isGeriatric ? 'block' : 'none';
+
+      // Buton Paneli Değişimi: Standart vs ESPEN Obezite Protokolü
+      const stdDoseGrid = document.getElementById('grid-clinical-doses-std');
+      const obeseDoseGrid = document.getElementById('grid-clinical-doses-obese');
+      const doseTitle = document.getElementById('lbl-clinical-dose-title');
+
+      if (isObese) {
+        stdDoseGrid.style.display = 'none';
+        obeseDoseGrid.style.display = 'grid';
+        doseTitle.innerText = 'Doz Seçimi: ESPEN Obezite Protokolü (İVA)';
+      } else {
+        stdDoseGrid.style.display = 'grid';
+        obeseDoseGrid.style.display = 'none';
+        doseTitle.innerText = 'Doz Seçimi (kcal / kg / gün)';
+      }
 
       const feverFactor = parseFloat(document.getElementById('sel-fever').value) || 0;
 
@@ -1001,11 +1076,24 @@
       if (bmi < 18.5) {
         clinMin = Math.round(weight * 10);
         clinMax = Math.round(weight * 15);
-        clinNote = "Refeeding koruması: Gün 1-3 dozu (10-15 kcal/kg Aktüel)";
-      } else if (bmi >= 30.0) {
-        clinMin = Math.round(ibw * 22);
-        clinMax = Math.round(ibw * 25);
-        clinNote = "Aşırı besleme önlemi: İdeal Ağırlık (İVA) x 22-25 kcal baz alınmıştır.";
+        clinNote = "Refeeding koruması: Gün 1-3 başlangıç dozu (10-15 kcal/kg Aktüel)";
+      } else if (isObese) {
+        let bMin = state.obeseMinDose;
+        let bMax = state.obeseMaxDose;
+
+        if (feverFactor > 0) {
+          bMin = Math.min(24, Math.round(bMin * (1 + feverFactor)));
+          bMax = 25; // 25 kcal/kg İVA aşırı besleme tavanıdır
+        }
+
+        clinMin = Math.round(ibw * bMin);
+        clinMax = Math.round(ibw * bMax);
+
+        if (bMin === bMax) {
+          clinNote = `Aşırı besleme önlemi: İdeal Ağırlık (${ibw.toFixed(1)} kg) x ${bMin} kcal baz alınmıştır.`;
+        } else {
+          clinNote = `Aşırı besleme önlemi: İdeal Ağırlık (${ibw.toFixed(1)} kg) x ${bMin}-${bMax} kcal baz alınmıştır.`;
+        }
       } else {
         let baseMin = state.clinicalMinDose;
         let baseMax = state.clinicalMaxDose;
@@ -1017,11 +1105,16 @@
 
         clinMin = Math.round(weight * baseMin);
         clinMax = Math.round(weight * baseMax);
-        clinNote = `Aktüel ağırlık (${weight} kg) x ${baseMin}-${baseMax} kcal ${feverFactor > 0 ? '(Ateş faktörü eklendi, tavan korumalı)' : ''}`;
+        clinNote = `Aktüel ağırlık (${weight} kg) x ${baseMin}-${baseMax} kcal ${feverFactor > 0 ? '(Ateş eklendi)' : ''}`;
       }
 
-      state.clinicalMidKcal = Math.round((clinMin + clinMax) / 2);
-      document.getElementById('res-clinical-range').innerText = `${clinMin} - ${clinMax} kcal`;
+      if (clinMin === clinMax) {
+        document.getElementById('res-clinical-range').innerText = `${clinMin} kcal`;
+        state.clinicalMidKcal = clinMin;
+      } else {
+        document.getElementById('res-clinical-range').innerText = `${clinMin} - ${clinMax} kcal`;
+        state.clinicalMidKcal = Math.round((clinMin + clinMax) / 2);
+      }
       document.getElementById('res-clinical-note').innerText = clinNote;
     }
 
@@ -1036,7 +1129,6 @@
       switchTab('tab-degisim');
     }
 
-    // --- DEĞİŞİM LİSTESİ RENDER ---
     function renderExchangeList() {
       const container = document.getElementById('exchange-list-container');
       container.innerHTML = '';
@@ -1092,7 +1184,6 @@
       updateSummary();
     }
 
-    // --- CAROUSEL KAYDIRMA DİNLEYİCİSİ ---
     function handleCarouselScroll() {
       const carousel = document.getElementById('bottom-carousel');
       const scrollPos = carousel.scrollLeft;
@@ -1129,7 +1220,7 @@
       totalPro = Math.round(totalPro);
       totalFat = Math.round(totalFat);
 
-      // --- KART 1: ENERJİ & MAKRO ---
+      // KART 1: ENERJİ & MAKRO
       const targetKcal = parseFloat(document.getElementById('inp-target-kcal').value) || 0;
       const deltaKcal = totalKcal - targetKcal;
 
@@ -1163,20 +1254,21 @@
       document.getElementById('lbl-pro-sum').innerText = `${totalPro}g (%${proPct})`;
       document.getElementById('lbl-fat-sum').innerText = `${totalFat}g (%${fatPct})`;
 
+      // PROTEİN GÖSTERGESİ: Obezitede tek İdeal g/kg, diğerlerinde standart Aktüel
       const gKgEl = document.getElementById('lbl-pro-gkg');
-      if (state.currentWeight > 0 && totalPro > 0) {
-        const actGkg = (totalPro / state.currentWeight).toFixed(2);
+      if (totalPro > 0) {
         if (state.currentBMI >= 30.0 && state.currentIBW > 0) {
           const ibwGkg = (totalPro / state.currentIBW).toFixed(2);
-          gKgEl.innerText = `[ ${actGkg} Aktüel | ${ibwGkg} İdeal g/kg ]`;
-        } else {
+          gKgEl.innerText = `[ ${ibwGkg} g/kg (İdeal) ]`;
+        } else if (state.currentWeight > 0) {
+          const actGkg = (totalPro / state.currentWeight).toFixed(2);
           gKgEl.innerText = `[ ${actGkg} g/kg ]`;
         }
       } else {
         gKgEl.innerText = '-';
       }
 
-      // --- KART 2: POSA & MİKROBİYOTA ---
+      // KART 2: POSA & MİKROBİYOTA
       totalFiber = Math.round(totalFiber * 10) / 10;
       totalSolFiber = Math.round(totalSolFiber * 10) / 10;
       totalInsolFiber = Math.round(totalInsolFiber * 10) / 10;
@@ -1208,13 +1300,54 @@
         fiberAlertEl.innerText = 'Asgari Altında';
       }
 
-      // --- KART 3: KLİNİK MİNERAL PANELİ (Ca & P) ---
+      // KART 3: MİNERAL DENGESİ (Ca & P)
+      const caTarget = (state.currentAge >= 65) ? 1200 : 1000;
+      const caText = `Hedef: ${caTarget} mg${state.currentAge >= 65 ? ' (≥65 Yaş)' : ''}`;
+      
       document.getElementById('lbl-ca-sum').innerText = `${Math.round(totalCa)} mg`;
       document.getElementById('lbl-p-sum').innerText = `${Math.round(totalP)} mg`;
+      document.getElementById('lbl-ca-target').innerText = caText;
 
-      const caTarget = (state.currentAge >= 65 || (state.gender === 'kadin' && state.currentAge >= 50)) ? 1200 : 1000;
-      document.getElementById('lbl-ca-target').innerText = `Ref: ${caTarget} mg`;
+      document.getElementById('lbl-ca-sum-k').innerText = `${Math.round(totalCa)} mg`;
+      document.getElementById('lbl-p-sum-k').innerText = `${Math.round(totalP)} mg`;
+      document.getElementById('lbl-ca-target-k').innerText = caText;
 
+      // Ca:P Oran Motoru (Poliklinik)
+      let pRatio = 0;
+      if (totalCa > 0) {
+        pRatio = totalP / totalCa;
+        document.getElementById('lbl-cap-ratio').innerText = `1 : ${pRatio.toFixed(2)}`;
+      } else {
+        document.getElementById('lbl-cap-ratio').innerText = (totalP > 0) ? `1 : ∞` : `1 : 1.0`;
+      }
+
+      const capStatus = document.getElementById('lbl-cap-status');
+      const capMeter = document.getElementById('bar-cap-meter');
+
+      if (totalCa === 0 && totalP === 0) {
+        capStatus.className = 'badge';
+        capStatus.style.background = '#e2e8f0';
+        capStatus.style.color = 'var(--text-muted)';
+        capStatus.innerText = 'Veri Yok';
+        capMeter.style.width = '0%';
+      } else if (pRatio <= 1.5) {
+        capStatus.className = 'badge badge-normal';
+        capStatus.innerText = 'İdeal (1:1-1.5)';
+        capMeter.style.width = Math.min(100, Math.round((pRatio / 2.0) * 100)) + '%';
+        capMeter.style.background = 'var(--success)';
+      } else if (pRatio <= 2.0) {
+        capStatus.className = 'badge badge-warning';
+        capStatus.innerText = 'Sınırda (1:1.5-2)';
+        capMeter.style.width = Math.min(100, Math.round((pRatio / 2.0) * 100)) + '%';
+        capMeter.style.background = 'var(--warning)';
+      } else {
+        capStatus.className = 'badge badge-danger';
+        capStatus.innerText = 'Fosfor Baskın (>1:2)';
+        capMeter.style.width = '100%';
+        capMeter.style.background = 'var(--danger)';
+      }
+
+      // Renal Alarm Motoru (Yatan Hasta Modu)
       const renalAlertEl = document.getElementById('lbl-renal-alert');
       if (totalP > 1000) {
         renalAlertEl.style.color = 'var(--danger)';
@@ -1228,7 +1361,7 @@
       }
     }
 
-    // --- TEK TIKLA DİYET ÖZETİ KOPYALAMA ---
+    // --- DİYET ÖZETİ KOPYALAMA ---
     function copyDietSummary() {
       let totalKcal = 0, totalCho = 0, totalPro = 0, totalFat = 0;
       let totalFiber = 0, totalCa = 0, totalP = 0;
@@ -1256,20 +1389,26 @@
       const choPct = totalKcal > 0 ? Math.round(((totalCho * 4) / totalKcal) * 100) : 0;
       const proPct = totalKcal > 0 ? Math.round(((totalPro * 4) / totalKcal) * 100) : 0;
       const fatPct = totalKcal > 0 ? Math.round(((totalFat * 9) / totalKcal) * 100) : 0;
-      const proGkg = (state.currentWeight > 0 && totalPro > 0) ? (totalPro / state.currentWeight).toFixed(2) : '-';
+      
+      const proGkg = (totalPro > 0) 
+        ? (state.currentBMI >= 30.0 && state.currentIBW > 0 
+            ? `${(totalPro / state.currentIBW).toFixed(2)} g/kg (İdeal)` 
+            : `${(totalPro / state.currentWeight).toFixed(2)} g/kg`)
+        : '-';
 
       const fluidMin = ((state.currentWeight * 30) / 1000).toFixed(1);
       const fluidMax = ((state.currentWeight * 35) / 1000).toFixed(1);
+      const capRatio = totalCa > 0 ? (totalP / totalCa).toFixed(2) : '-';
 
       let summaryText = `📋 KLİNİK BESLENME & DİYET PLANI ÖZETİ\n` +
         `-----------------------------------------\n` +
         `Danışan: ${state.gender === 'kadin' ? 'Kadın' : 'Erkek'}, ${state.currentAge} Yaş | Boy: ${state.currentHeight} cm | Ağırlık: ${state.currentWeight} kg\n` +
         `BKİ: ${state.currentBMI.toFixed(1)} kg/m² | İdeal Ağırlık: ${state.currentIBW.toFixed(1)} kg\n` +
         `Günlük Sıvı: ${fluidMin} - ${fluidMax} L | Diyet Posası: ${totalFiber.toFixed(1)} g\n` +
-        `Mineraller: Ca: ${Math.round(totalCa)} mg | Fosfor: ${Math.round(totalP)} mg\n` +
+        `Mineraller: Ca: ${Math.round(totalCa)} mg | P: ${Math.round(totalP)} mg (Ca:P = 1:${capRatio})\n` +
         `-----------------------------------------\n` +
         `Hedef Enerji: ${targetKcal} kcal | Planlanan: ${totalKcal} kcal\n` +
-        `Makro Dağılımı: CHO: ${totalCho}g (%${choPct}) | PRO: ${totalPro}g (%${proPct} - ${proGkg} g/kg) | YAĞ: ${totalFat}g (%${fatPct})\n` +
+        `Makro Dağılımı: CHO: ${totalCho}g (%${choPct}) | PRO: ${totalPro}g (%${proPct} - ${proGkg}) | YAĞ: ${totalFat}g (%${fatPct})\n` +
         `-----------------------------------------\n` +
         `GÜNLÜK BESİN DEĞİŞİM DAĞILIMI:\n` +
         (exchangeLines.length > 0 ? exchangeLines.join('\n') : '• Henüz porsiyon girilmedi.') +

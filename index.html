@@ -42,7 +42,6 @@
       line-height: 1.4;
     }
 
-    /* Üst Sabit Başlık & Sekmeler */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -85,7 +84,6 @@
       background: var(--primary-light);
     }
 
-    /* Ana İçerik Alanı */
     main {
       flex: 1;
       padding: 16px;
@@ -94,15 +92,9 @@
       width: 100%;
     }
 
-    .tab-content {
-      display: none;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Kart Yapısı */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -122,22 +114,13 @@
       justify-content: space-between;
     }
 
-    /* Form ve Girdiler */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
     }
 
-    .form-group {
-      margin-bottom: 12px;
-    }
+    .form-group { margin-bottom: 12px; }
 
     label {
       display: block;
@@ -149,7 +132,7 @@
       letter-spacing: 0.5px;
     }
 
-    input[type="number"], select {
+    input[type="number"] {
       width: 100%;
       padding: 10px 12px;
       border: 1px solid var(--border);
@@ -159,14 +142,10 @@
       color: var(--text);
       background: #fff;
       outline: none;
-      transition: border-color 0.2s;
     }
 
-    input[type="number"]:focus, select:focus {
-      border-color: var(--primary);
-    }
+    input[type="number"]:focus { border-color: var(--primary); }
 
-    /* Segmented Butonlar (Cinsiyet & Mod) */
     .segmented {
       display: flex;
       background: #f1f5f9;
@@ -193,7 +172,6 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    /* Rozetler ve Uyarılar */
     .badge {
       display: inline-block;
       padding: 4px 8px;
@@ -217,7 +195,6 @@
     .alert-danger { background: var(--danger-bg); border-left: 4px solid var(--danger); color: #7f1d1d; }
     .alert-warning { background: var(--warning-bg); border-left: 4px solid var(--warning); color: #78350f; }
 
-    /* Hızlı Seçim Buton Grupları (PAL & Hedef) */
     .btn-group-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -235,7 +212,6 @@
       color: var(--text);
       cursor: pointer;
       text-align: left;
-      transition: all 0.15s;
     }
 
     .select-btn small {
@@ -271,7 +247,6 @@
 
     .action-btn:active { background: var(--primary-dark); }
 
-    /* Sekme 2: Değişim Sayaçları Kartı */
     .exchange-item {
       display: flex;
       align-items: center;
@@ -281,18 +256,12 @@
     }
 
     .exchange-item:last-child { border-bottom: none; }
-
     .exchange-info { flex: 1; padding-right: 8px; }
     .exchange-name { font-size: 0.9rem; font-weight: 700; color: var(--text); }
     .exchange-sub { font-size: 0.75rem; color: var(--text-muted); }
     .exchange-live { font-size: 0.75rem; font-weight: 600; color: var(--primary-dark); margin-top: 2px; }
 
-    .stepper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .stepper { display: flex; align-items: center; gap: 8px; }
     .step-btn {
       width: 36px;
       height: 36px;
@@ -307,11 +276,9 @@
       justify-content: center;
       cursor: pointer;
     }
-
     .step-btn:active { background: var(--border); }
     .step-value { font-size: 1.05rem; font-weight: 700; min-width: 24px; text-align: center; }
 
-    /* Sabit Alt Bar (Sticky Footer) */
     .sticky-footer {
       position: sticky;
       bottom: 0;
@@ -324,11 +291,7 @@
       z-index: 40;
     }
 
-    .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
+    .footer-content { max-width: 600px; margin: 0 auto; }
     .energy-progress-row {
       display: flex;
       justify-content: space-between;
@@ -370,7 +333,6 @@
       border-radius: 6px;
       border: 1px solid #f1f5f9;
     }
-
     .macro-box strong { display: block; font-size: 0.85rem; color: var(--text); }
     .macro-box.cho { border-left: 3px solid #3b82f6; }
     .macro-box.pro { border-left: 3px solid #ef4444; }
@@ -381,7 +343,7 @@
 
   <header>
     <div class="app-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
       <span>Klinik Diyet & Enerji Asistanı</span>
     </div>
     <div class="tabs">
@@ -391,10 +353,9 @@
   </header>
 
   <main>
-    <!-- ==================== SEKME 1: ENERJİ HESABI ==================== -->
+    <!-- SEKME 1: ENERJİ HESABI -->
     <div id="tab-enerji" class="tab-content active">
       
-      <!-- Alan Tercihi -->
       <div class="card" style="padding: 10px;">
         <label>Çalışma Alanı</label>
         <div class="segmented">
@@ -403,7 +364,6 @@
         </div>
       </div>
 
-      <!-- Danışan Girdileri -->
       <div class="card">
         <div class="card-title">Hasta / Danışan Bilgileri</div>
         
@@ -430,19 +390,32 @@
           </div>
         </div>
 
-        <!-- Antropometri Durum Özeti -->
-        <div id="box-antropo" style="margin-top: 8px; padding-top: 10px; border-top: 1px dashed var(--border); font-size: 0.85rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <!-- İdeal BKİ Referans Tercihi (WHO vs NRC) -->
+        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label style="margin: 0;">İdeal BKİ Standardı:</label>
+            <div class="segmented" style="width: 200px;">
+              <button id="btn-ref-who" class="active" onclick="setRefStandard('who')" style="padding: 4px 6px; font-size: 0.75rem;">WHO (22.0)</button>
+              <button id="btn-ref-nrc" onclick="setRefStandard('nrc')" style="padding: 4px 6px; font-size: 0.75rem;">NRC (Yaş Dilimli)</button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 0.85rem;">
             <span>BKİ: <strong id="res-bmi">26.4</strong> kg/m²</span>
             <span id="res-bmi-badge" class="badge badge-warning">Hafif Şişman</span>
           </div>
           <div style="color: var(--text-muted); font-size: 0.78rem;">
-            İdeal BKİ: <strong id="res-ref-bmi">22.0</strong> | İdeal Kilo: <strong id="res-ibw">59.9</strong> kg (<span id="res-weight-diff">+12.1 kg</span>)
+            İdeal Referans: <strong id="res-ref-bmi">22.0</strong> | İdeal Kilo: <strong id="res-ibw">59.9</strong> kg (<span id="res-weight-diff">+12.1 kg</span>)
+          </div>
+
+          <!-- Gerçekçi İlk Hedef Rozeti (Sadece BKİ >= 25 ise açılır) -->
+          <div id="box-realistic-target" style="display: none; margin-top: 8px; padding: 6px 10px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; font-size: 0.78rem; color: #166534;">
+            🎯 <strong>İlk Klinik Hedef (%5-10 Kayıp):</strong> <span id="res-realistic-range">64.8 - 68.4 kg</span> <small>(3-6 Ay)</small>
           </div>
         </div>
       </div>
 
-      <!-- POLİKLİNİK MODU AYRINTILARI -->
+      <!-- POLİKLİNİK MODU -->
       <div id="view-poliklinik">
         <div class="card">
           <div class="card-title">Fiziksel Aktivite Düzeyi (PAL)</div>
@@ -461,7 +434,7 @@
             </button>
             <button class="select-btn" onclick="setPAL(1.725, this)">
               Ağır Aktif (1.725)
-              <small>Ağır beden işi / yoğun antrenman</small>
+              <small>Ağır beden işi / yoğun spor</small>
             </button>
           </div>
 
@@ -482,7 +455,7 @@
           <div class="btn-group-grid">
             <button class="select-btn" onclick="setTargetDelta(-500, this)">
               Kilo Verme (-500)
-              <small>Wishnofsky (~0.5 kg/hf)</small>
+              <small>Standart açık</small>
             </button>
             <button class="select-btn" onclick="setTargetDelta(-300, this)">
               Hafif Açık (-300)
@@ -503,41 +476,44 @@
             <span style="font-size: 1.25rem; font-weight: 800; color: var(--primary-dark);"><span id="res-target-final">1987</span> kcal</span>
           </div>
 
+          <!-- BMR ve Taban Kalori Güvenlik Uyarısı -->
+          <div id="alert-bmr-floor" class="alert-box alert-warning" style="display: none;">
+            <strong>⚠️ Güvenlik Uyarısı: BMR / Asgari Taban İhlali!</strong><br>
+            <span id="alert-bmr-text">Hedef kalori danışanın bazal metabolizmasının veya cinsiyet tabanının altındadır.</span><br>
+            <small>• Kas kaybı, tiroid yavaşlaması ve adaptif termogenezi önlemek için <strong>"-300 kcal (Hafif Açık)"</strong> seçilmesi veya açığın yürüyüş/egzersizle oluşturulması önerilir.</small>
+          </div>
+
           <button class="action-btn" onclick="transferTargetToExchanges()">
             Hedefi Değişime Aktar ve Planla ➔
           </button>
         </div>
       </div>
 
-      <!-- KLİNİK / YATAN HASTA MODU AYRINTILARI -->
+      <!-- KLİNİK MODU -->
       <div id="view-klinik" style="display: none;">
         <div class="card">
           <div class="card-title">ESPEN / KEPAN Klinik Enerji Hedefi</div>
 
-          <!-- Refeeding Emniyet Rozeti -->
           <div id="alert-refeeding" class="alert-box alert-danger" style="display: none;">
             <strong>🚨 Refeeding Sendromu Riski! (BKİ &lt; 18.5)</strong><br>
-            Aşırı zayıf hastada İVA veya DVA kullanılmaz. Başlangıç enerjisi <strong>10-15 kcal/kg (Aktüel)</strong> ile sınırlandırılmalıdır.<br>
-            <small>• Gün 1-3: 10-15 kcal/kg | Gün 4-5: 15-20 kcal/kg | Gün 6+: 25 kcal/kg</small>
+            Aşırı zayıf hastada başlangıç enerjisi <strong>10-15 kcal/kg (Aktüel)</strong> ile sınırlandırılmalıdır.
           </div>
 
-          <!-- Obezite Overfeeding Koruması -->
           <div id="alert-obesity" class="alert-box alert-warning" style="display: none;">
             <strong>⚠️ Obezite - Aşırı Besleme (Overfeeding) Koruması</strong><br>
-            Aşırı beslemeyi önlemek için ESPEN kılavuzları <strong>İdeal Kilo üzerinden 22-25 kcal/kg</strong> veya <strong>Aktüel Kilo üzerinden hipokalorik 11-14 kcal/kg</strong> önerir.
+            ESPEN kılavuzları <strong>İdeal Kilo üzerinden 22-25 kcal/kg</strong> veya <strong>Aktüel Kilo üzerinden hipokalorik 11-14 kcal/kg</strong> önerir.
           </div>
 
-          <!-- Geriatri Rozeti -->
           <div id="alert-geriatric" class="alert-box alert-warning" style="display: none;">
             <strong>👴 Geriatrik Aralık (≥ 65 Yaş)</strong><br>
-            ESPEN ve TÜBER 2022'ye göre sağlıklı geriatrik hedef aralık 22.0 - 27.0 kg/m²'dir. İdeal hedef referansı 24.0 kg/m² alınmıştır.
+            ESPEN ve TÜBER 2022'ye göre sağlıklı geriatrik hedef aralık 22.0 - 27.0 kg/m²'dir.
           </div>
 
           <label style="margin-top: 12px;">Doz Seçimi (kcal / kg / gün)</label>
           <div class="btn-group-grid" id="grid-clinical-doses">
             <button class="select-btn" onclick="setClinicalDose(20, 25, this)">
               20 - 25 kcal/kg
-              <small>Akut / Düşük stres / İVA</small>
+              <small>Akut / Düşük stres</small>
             </button>
             <button class="select-btn active" onclick="setClinicalDose(25, 30, this)">
               25 - 30 kcal/kg
@@ -551,12 +527,8 @@
 
           <div style="margin-top: 14px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--border);">
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2px;">Hesaplanan Güvenli Klinik Hedef:</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-dark);" id="res-clinical-range">
-              1800 - 2160 kcal
-            </div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;" id="res-clinical-note">
-              Aktüel ağırlık baz alınmıştır.
-            </div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-dark);" id="res-clinical-range">1800 - 2160 kcal</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;" id="res-clinical-note">Aktüel ağırlık baz alınmıştır.</div>
           </div>
 
           <button class="action-btn" onclick="transferClinicalTargetToExchanges()">
@@ -567,10 +539,9 @@
 
     </div>
 
-    <!-- ==================== SEKME 2: DEĞİŞİM DAĞILIMI ==================== -->
+    <!-- SEKME 2: DEĞİŞİM DAĞILIMI -->
     <div id="tab-degisim" class="tab-content">
       
-      <!-- Hedef Kalori Çubuğu -->
       <div class="card" style="padding: 12px 16px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
@@ -583,19 +554,16 @@
         </div>
       </div>
 
-      <!-- 10'lu Değişim Listesi -->
       <div class="card">
-        <div class="card-title">Besin Grubu Porsiyonları</div>
-        <div id="exchange-list-container">
-          <!-- JS ile doldurulacak -->
-        </div>
+        <div class="card-title">Besin Grubu Porsiyonları (11 Grup)</div>
+        <div id="exchange-list-container"></div>
       </div>
 
-      <div style="height: 120px;"></div> <!-- Sticky footer için alt boşluk -->
+      <div style="height: 120px;"></div>
     </div>
   </main>
 
-  <!-- ==================== CANLI SABİT ALT BAR (STICKY FOOTER) ==================== -->
+  <!-- CANLI SABİT ALT BAR -->
   <div id="sticky-bar" class="sticky-footer" style="display: none;">
     <div class="footer-content">
       <div class="energy-progress-row">
@@ -631,11 +599,12 @@
   </div>
 
   <script>
-    // --- 1. VERİ TANIMLARI ---
+    // 11 GRUPLU GELİŞMİŞ DEĞİŞİM VERİTABANI
     const EXCHANGES = [
       { id: 'sut_tam', name: 'Süt (Tam Yağlı)', sub: '1 sb (200 ml) süt, yoğurt, kefir', cho: 6, pro: 6, fat: 6, kcal: 102, count: 0 },
       { id: 'sut_yarim', name: 'Süt (Yarım Yağlı/Yağsız)', sub: '1 sb (200 ml) light süt, ayran', cho: 6, pro: 6, fat: 3, kcal: 75, count: 0 },
-      { id: 'et', name: 'Et / Peynir / Yumurta', sub: '30g et, 1 yumurta, 30g peynir', cho: 0, pro: 6, fat: 5, kcal: 69, count: 0 },
+      { id: 'et_az', name: 'Et (Az Yağlı / Tavuk Göğsü / Lor)', sub: '30g tavuk/hindi göğsü, yağsız balık, 2 yk lor', cho: 0, pro: 6, fat: 2, kcal: 42, count: 0 },
+      { id: 'et_orta', name: 'Et (Orta Yağlı / Yumurta / Peynir)', sub: '30g dana eti/köfte, 1 tam yumurta, 30g beyaz peynir', cho: 0, pro: 6, fat: 5, kcal: 69, count: 0 },
       { id: 'kbl', name: 'Kurubaklagil (KBL)', sub: '4 yk pişmiş (25-30g kuru)', cho: 15, pro: 6, fat: 1, kcal: 93, count: 0 },
       { id: 'eyg', name: 'Ekmek ve Tahıl (EYG)', sub: '1 dilim ekmek, 2-3 yk pilav (Patates/Mısır dahil)*', cho: 15, pro: 2, fat: 0, kcal: 68, count: 0 },
       { id: 'sebze', name: 'Sebze Grubu', sub: '4 yk pişmiş sebze, 1 kase çiğ salata', cho: 6, pro: 1, fat: 0, kcal: 28, count: 0 },
@@ -650,14 +619,17 @@
       mode: 'poliklinik',
       pal: 1.375,
       targetDelta: 0,
+      refStandard: 'who',
       clinicalMinDose: 25,
       clinicalMaxDose: 30,
       calculatedBMR: 0,
       calculatedTEE: 0,
+      currentWeight: 72,
+      currentIBW: 59.9,
+      currentBMI: 26.4,
       clinicalMidKcal: 1980
     };
 
-    // --- 2. BAŞLATMA VE SEKME YÖNETİMİ ---
     window.addEventListener('DOMContentLoaded', () => {
       renderExchangeList();
       calculateEnergy();
@@ -695,6 +667,13 @@
       calculateEnergy();
     }
 
+    function setRefStandard(std) {
+      state.refStandard = std;
+      document.getElementById('btn-ref-who').classList.toggle('active', std === 'who');
+      document.getElementById('btn-ref-nrc').classList.toggle('active', std === 'nrc');
+      calculateEnergy();
+    }
+
     function setPAL(val, elem) {
       state.pal = val;
       elem.parentNode.querySelectorAll('.select-btn').forEach(b => b.classList.remove('active'));
@@ -717,32 +696,37 @@
       calculateEnergy();
     }
 
-    // --- 3. ANTROPOMETRİ VE ENERJİ MOTORU ---
-function calculateEnergy() {
-      // 1. Kutudaki ham değerleri al (Kutu tamamen silinirse hesap motoru çökmesin diye geçici varsayılanlar kullanılır, ama kutudaki silinmiş hali bozulmaz)
-      let ageRaw = document.getElementById('inp-age').value;
-      let heightRaw = document.getElementById('inp-height').value;
-      let weightRaw = document.getElementById('inp-weight').value;
+    // --- ENERJİ VE ANTROPOMETRİ MOTORU ---
+    function calculateEnergy() {
+      let age = parseFloat(document.getElementById('inp-age').value) || 25;
+      let height = parseFloat(document.getElementById('inp-height').value) || 165;
+      let weight = parseFloat(document.getElementById('inp-weight').value) || 70;
 
-      let age = parseFloat(ageRaw) || 25;
-      let height = parseFloat(heightRaw) || 165;
-      let weight = parseFloat(weightRaw) || 70;
-
-      // Boy metre/cm kontrolü (Arka planda çalışır, kullanıcının yazdığı kutuyu zorla değiştirmez)
-      if (height > 0 && height < 3.0) {
-        height = height * 100;
-      }
+      if (height > 0 && height < 3.0) height = height * 100;
 
       const heightM = height / 100.0;
       const bmi = weight / (heightM * heightM);
 
-      // İdeal BKİ Referansı: Geriatri (>=65 yaş) ise 24, değilse 22
-      const isGeriatric = (age >= 65);
-      const refBMI = isGeriatric ? 24.0 : 22.0;
+      // İdeal BKİ Referansı Belirleme (WHO vs NRC 1989)
+      let refBMI = 22.0;
+      if (state.refStandard === 'who') {
+        refBMI = (age >= 65) ? 24.0 : 22.0;
+      } else {
+        if (age < 25) refBMI = 21.5;
+        else if (age < 35) refBMI = 22.5;
+        else if (age < 45) refBMI = 23.5;
+        else if (age < 55) refBMI = 24.5;
+        else if (age < 65) refBMI = 25.5;
+        else refBMI = 26.5;
+      }
+
       const ibw = refBMI * (heightM * heightM);
       const diffKg = weight - ibw;
 
-      // Antropometri Görselleri
+      state.currentWeight = weight;
+      state.currentIBW = ibw;
+      state.currentBMI = bmi;
+
       document.getElementById('res-bmi').innerText = bmi.toFixed(1);
       document.getElementById('res-ref-bmi').innerText = refBMI.toFixed(1);
       document.getElementById('res-ibw').innerText = ibw.toFixed(1);
@@ -763,7 +747,18 @@ function calculateEnergy() {
         badge.innerText = 'Obezite';
       }
 
-      // Poliklinik Hesabı: Mifflin-St Jeor (Aktüel Kilo ile)
+      // Gerçekçi İlk Klinik Hedef (%5 - %10 Kayıp)
+      const realisticBox = document.getElementById('box-realistic-target');
+      if (bmi >= 25.0) {
+        realisticBox.style.display = 'block';
+        const targetMin = (weight * 0.90).toFixed(1);
+        const targetMax = (weight * 0.95).toFixed(1);
+        document.getElementById('res-realistic-range').innerText = `${targetMin} - ${targetMax} kg`;
+      } else {
+        realisticBox.style.display = 'none';
+      }
+
+      // Poliklinik BMR Hesabı (Mifflin-St Jeor)
       let bmr = 0;
       if (state.gender === 'erkek') {
         bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
@@ -780,40 +775,47 @@ function calculateEnergy() {
       document.getElementById('res-tee').innerText = state.calculatedTEE + ' kcal';
       document.getElementById('res-target-final').innerText = finalTarget;
 
-      // Yatan Hasta (Klinik) Hesabı
-      const alertRefeeding = document.getElementById('alert-refeeding');
-      const alertObesity = document.getElementById('alert-obesity');
-      const alertGeriatric = document.getElementById('alert-geriatric');
+      // BMR ve Taban Kalori Güvenlik Denetimi
+      const alertBmrFloor = document.getElementById('alert-bmr-floor');
+      const alertBmrText = document.getElementById('alert-bmr-text');
+      const minFloorKcal = (state.gender === 'kadin') ? 1200 : 1500;
 
-      alertRefeeding.style.display = (bmi < 18.5) ? 'block' : 'none';
-      alertObesity.style.display = (bmi >= 30.0) ? 'block' : 'none';
-      alertGeriatric.style.display = isGeriatric ? 'block' : 'none';
+      if (state.targetDelta < 0 && (finalTarget < state.calculatedBMR || finalTarget < minFloorKcal)) {
+        alertBmrFloor.style.display = 'block';
+        let sebep = [];
+        if (finalTarget < state.calculatedBMR) sebep.push(`BMR'nin (${state.calculatedBMR} kcal)`);
+        if (finalTarget < minFloorKcal) sebep.push(`${state.gender === 'kadin' ? 'Kadın' : 'Erkek'} tabanının (${minFloorKcal} kcal)`);
+        alertBmrText.innerText = `Seçilen hedef (${finalTarget} kcal), ${sebep.join(' ve ')} altındadır.`;
+      } else {
+        alertBmrFloor.style.display = 'none';
+      }
+
+      // Klinik Mod Uyarıları
+      const isGeriatric = (age >= 65);
+      document.getElementById('alert-refeeding').style.display = (bmi < 18.5) ? 'block' : 'none';
+      document.getElementById('alert-obesity').style.display = (bmi >= 30.0) ? 'block' : 'none';
+      document.getElementById('alert-geriatric').style.display = isGeriatric ? 'block' : 'none';
 
       let clinMin = 0, clinMax = 0, clinNote = "";
-
       if (bmi < 18.5) {
-        // Refeeding Protokolü: Gün 1-3 Aktüel x 10-15 kcal
         clinMin = Math.round(weight * 10);
         clinMax = Math.round(weight * 15);
         clinNote = "Refeeding koruması: Gün 1-3 dozu (10-15 kcal/kg Aktüel)";
       } else if (bmi >= 30.0) {
-        // ESPEN İVA Koruma Dozu (22-25 kcal/kg İVA)
         clinMin = Math.round(ibw * 22);
         clinMax = Math.round(ibw * 25);
         clinNote = "Aşırı besleme önlemi: İdeal Ağırlık (İVA) x 22-25 kcal baz alınmıştır.";
       } else {
-        // Standart Klinik Doz
         clinMin = Math.round(weight * state.clinicalMinDose);
         clinMax = Math.round(weight * state.clinicalMaxDose);
-        clinNote = "Aktüel ağırlık (" + weight + " kg) x " + state.clinicalMinDose + "-" + state.clinicalMaxDose + " kcal baz alınmıştır.";
+        clinNote = `Aktüel ağırlık (${weight} kg) x ${state.clinicalMinDose}-${state.clinicalMaxDose} kcal baz alınmıştır.`;
       }
 
       state.clinicalMidKcal = Math.round((clinMin + clinMax) / 2);
-      document.getElementById('res-clinical-range').innerText = clinMin + ' - ' + clinMax + ' kcal';
+      document.getElementById('res-clinical-range').innerText = `${clinMin} - ${clinMax} kcal`;
       document.getElementById('res-clinical-note').innerText = clinNote;
     }
 
-    // --- 4. HEDEFİ AKTARMA ---
     function transferTargetToExchanges() {
       const target = document.getElementById('res-target-final').innerText;
       document.getElementById('inp-target-kcal').value = target;
@@ -825,7 +827,7 @@ function calculateEnergy() {
       switchTab('tab-degisim');
     }
 
-    // --- 5. DEĞİŞİM LİSTESİ VE SAYAÇ MOTORU ---
+    // --- DEĞİŞİM LİSTESİ RENDER ---
     function renderExchangeList() {
       const container = document.getElementById('exchange-list-container');
       container.innerHTML = '';
@@ -877,7 +879,7 @@ function calculateEnergy() {
       updateSummary();
     }
 
-    // --- 6. CANLI ÖZET VE SABİT BAR GÜNCELLEMESİ ---
+    // --- CANLI ÖZET VE HESAPLAMA MOTORU ---
     function updateSummary() {
       let totalKcal = 0;
       let totalCho = 0;
@@ -894,7 +896,6 @@ function calculateEnergy() {
       const targetKcal = parseFloat(document.getElementById('inp-target-kcal').value) || 0;
       const deltaKcal = totalKcal - targetKcal;
 
-      // Kalori Göstergeleri
       document.getElementById('lbl-total-kcal').innerText = totalKcal;
       document.getElementById('lbl-target-kcal').innerText = targetKcal;
 
@@ -910,7 +911,6 @@ function calculateEnergy() {
         deltaEl.innerText = '+' + deltaKcal + ' kcal (Fazla)';
       }
 
-      // Makro Yüzdeleri
       let choPct = 0, proPct = 0, fatPct = 0;
       if (totalKcal > 0) {
         choPct = Math.round(((totalCho * 4) / totalKcal) * 100);
@@ -926,12 +926,16 @@ function calculateEnergy() {
       document.getElementById('lbl-pro-sum').innerText = `${totalPro}g (%${proPct})`;
       document.getElementById('lbl-fat-sum').innerText = `${totalFat}g (%${fatPct})`;
 
-      // g/kg Protein Hesabı (1. sayfadaki kiloya göre)
-      const weight = parseFloat(document.getElementById('inp-weight').value) || 0;
+      // Protein g/kg: Obezite İkili Göstergesi (Aktüel vs İdeal)
       const gKgEl = document.getElementById('lbl-pro-gkg');
-      if (weight > 0 && totalPro > 0) {
-        const gKg = (totalPro / weight).toFixed(2);
-        gKgEl.innerText = `[ ${gKg} g/kg ]`;
+      if (state.currentWeight > 0 && totalPro > 0) {
+        const actGkg = (totalPro / state.currentWeight).toFixed(2);
+        if (state.currentBMI >= 30.0 && state.currentIBW > 0) {
+          const ibwGkg = (totalPro / state.currentIBW).toFixed(2);
+          gKgEl.innerText = `[ ${actGkg} Aktüel | ${ibwGkg} İdeal g/kg ]`;
+        } else {
+          gKgEl.innerText = `[ ${actGkg} g/kg ]`;
+        }
       } else {
         gKgEl.innerText = '-';
       }

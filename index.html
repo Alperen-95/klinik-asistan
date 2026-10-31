@@ -25,7 +25,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; touch-action: manipulation; }
     body { background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; line-height: 1.4; }
     
-    /* GİZLİ YAZDIRMA ALANI (PDF İÇİN) */
     #print-section { display: none; }
 
     header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
@@ -44,14 +43,16 @@
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .form-group { margin-bottom: 12px; }
     label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; }
-    input[type="number"], input[type="text"], select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-weight: 600; outline: none; }
-    input:focus, select:focus { border-color: var(--primary); }
+    input[type="number"], input[type="text"], select, textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-weight: 600; outline: none; font-family: inherit; }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
     
     .segmented { display: flex; background: #f1f5f9; padding: 3px; border-radius: 8px; gap: 2px; }
     .segmented button { flex: 1; padding: 8px; border: none; background: none; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); border-radius: 6px; cursor: pointer; }
     .segmented button.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     
     .btn-group-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 6px; }
+    .btn-col { display: flex; flex-direction: column; gap: 8px; }
+    
     .select-btn { padding: 10px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: 0.8rem; font-weight: 600; color: var(--text); cursor: pointer; text-align: center; }
     .select-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary-dark); }
     
@@ -62,15 +63,15 @@
     .bmi-gauge-container { margin-top: 16px; position: relative; padding-bottom: 20px; }
     .bmi-gauge-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: #e2e8f0; }
     .bmi-segment { height: 100%; }
-    .bmi-blue { width: 20%; background: #3b82f6; }   /* < 18.5 */
-    .bmi-green { width: 35%; background: #10b981; }  /* 18.5 - 24.9 */
-    .bmi-yellow { width: 25%; background: #f59e0b; } /* 25 - 29.9 */
-    .bmi-red { width: 20%; background: #ef4444; }    /* >= 30 */
+    .bmi-blue { width: 20%; background: #3b82f6; }
+    .bmi-green { width: 35%; background: #10b981; }
+    .bmi-yellow { width: 25%; background: #f59e0b; }
+    .bmi-red { width: 20%; background: #ef4444; }
     .bmi-marker { position: absolute; top: -4px; width: 4px; height: 16px; background: #0f172a; border-radius: 2px; transform: translateX(-50%); transition: left 0.3s ease; z-index: 2; }
     .bmi-marker-ideal { background: #0d9488; height: 12px; top: -2px; z-index: 1; opacity: 0.7; }
     .bmi-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
     
-    /* DEĞİŞİM LİSTESİ VE STEPPER (MANUEL KLAVYELİ) */
+    /* DEĞİŞİM LİSTESİ */
     .exchange-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
     .exchange-item:last-child { border-bottom: none; }
     .exchange-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
@@ -78,10 +79,7 @@
     .stepper { display: flex; align-items: center; gap: 4px; }
     .step-btn { width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--border); background: #f8fafc; font-size: 1.4rem; font-weight: 400; color: var(--text); cursor: pointer; display: flex; justify-content: center; align-items: center;}
     .step-btn:active { background: #e2e8f0; }
-    
-    /* Ortadaki İnput - Oku ve Yaz */
     .step-input { width: 44px; height: 38px; text-align: center; font-size: 1.1rem; font-weight: 700; border: 1px solid transparent; background: transparent; color: var(--text); padding: 0; appearance: none; -moz-appearance: textfield; }
-    .step-input::-webkit-outer-spin-button, .step-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .step-input:focus { border: 1px solid var(--primary); border-radius: 6px; background: #fff; }
 
     /* KAYDIRILABİLİR ALT ÇUBUK (CAROUSEL) */
@@ -99,32 +97,38 @@
     
     /* MODAL (RAPOR OLUŞTURMA PENCERESİ) */
     .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 16px; }
-    .modal-content { background: #fff; width: 100%; max-width: 400px; border-radius: 16px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    .modal-content { background: #fff; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; border-radius: 16px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
     
     /* KILAVUZ TABLOSU (3. SEKME) */
     .ref-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; text-align: left; }
     .ref-table th, .ref-table td { padding: 8px 4px; border-bottom: 1px solid var(--border); }
     .ref-table th { background: var(--primary-light); color: var(--primary-dark); }
 
-    /* YAZDIRMA (PRINT) CSS'İ */
+    /* YAZDIRMA (PRINT) CSS'İ - DÜZELTİLDİ */
     @media print {
-      body * { visibility: hidden; }
-      #print-section, #print-section * { visibility: visible; }
-      #print-section { position: absolute; left: 0; top: 0; width: 100%; padding: 20px; font-family: Arial, sans-serif; }
+      @page { margin: 1cm; size: A4; }
+      body { background: #fff; }
+      /* Arayüzü gizle, Sadece Print kısmını göster */
+      #app-interface, #report-modal, .sticky-footer { display: none !important; }
+      #print-section { display: block !important; width: 100%; color: #000; font-family: Helvetica, Arial, sans-serif; line-height: 1.5; }
+      
       .print-header { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
       .print-title { font-size: 18px; font-weight: bold; color: var(--primary-dark); text-transform: uppercase; }
       .print-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; font-size: 14px; }
-      .print-box { border: 1px solid #ddd; padding: 10px; border-radius: 8px; }
+      .print-box { border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; background: #f8fafc; }
+      
       .print-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
-      .print-table th, .print-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-      .print-table th { background-color: #f8fafc; }
-      .print-footer { margin-top: 40px; text-align: right; font-weight: bold; }
+      .print-table th, .print-table td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+      .print-table th { background-color: #f1f5f9; font-weight: bold; }
+      
+      .print-notes-box { margin-top: 20px; padding: 12px; border: 1px dashed #94a3b8; border-radius: 8px; font-size: 14px; background: #fdf8f6; }
+      .print-footer { margin-top: 40px; text-align: right; font-weight: bold; font-size: 14px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- UYGULAMA ARAYÜZÜ (PRINT DIŞI) -->
+  <!-- UYGULAMA ARAYÜZÜ -->
   <div id="app-interface">
     <header>
       <div class="app-title">
@@ -142,7 +146,6 @@
       <!-- SEKME 1: ENERJİ HESABI -->
       <div id="tab-enerji" class="tab-content active">
         
-        <!-- ADIM 1: MOD SEÇİMİ -->
         <div class="card" style="padding: 10px;">
           <div class="segmented">
             <button id="btn-mod-poli" class="active" onclick="setMode('poliklinik')">Poliklinik</button>
@@ -150,7 +153,6 @@
           </div>
         </div>
 
-        <!-- ADIM 2: ANTROPOMETRİ -->
         <div class="card">
           <div class="grid-2" style="margin-bottom:12px;">
             <div class="segmented">
@@ -174,10 +176,8 @@
           </div>
         </div>
 
-        <!-- SIFIR DURUM KONTROLÜ (AĞIRLIK GİRİLMEDEN AŞAĞISI GÖRÜNMEZ) -->
         <div id="calc-results-container" style="display: none;">
           
-          <!-- BKİ GÖRSEL BARI -->
           <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: baseline;">
               <span style="font-size: 1.2rem; font-weight: 800;" id="res-bmi">0.0 <span style="font-size: 0.75rem; color: var(--text-muted);">kg/m²</span></span>
@@ -194,11 +194,7 @@
               <div id="bmi-marker-current" class="bmi-marker" title="Mevcut BKİ"></div>
               <div id="bmi-marker-ideal" class="bmi-marker bmi-marker-ideal" title="İdeal BKİ"></div>
               <div class="bmi-labels">
-                <span>15</span>
-                <span>18.5</span>
-                <span>25</span>
-                <span>30</span>
-                <span>40+</span>
+                <span>15</span><span>18.5</span><span>25</span><span>30</span><span>40+</span>
               </div>
             </div>
             
@@ -211,21 +207,26 @@
             </div>
           </div>
 
-          <!-- POLİKLİNİK ÖZEL PANELİ -->
+          <!-- POLİKLİNİK ÖZEL PANELİ (YENİ İKİ SÜTUNLU TASARIM) -->
           <div id="view-poliklinik">
             <div class="card">
-              <div class="card-title">Aktivite (PAL) & Hedef</div>
-              <div class="btn-group-grid">
-                <button class="select-btn" onclick="setPAL(1.20, this)">Sedanter</button>
-                <button class="select-btn active" onclick="setPAL(1.375, this)">Hafif Aktif</button>
-                <button class="select-btn" onclick="setPAL(1.55, this)">Orta Aktif</button>
-                <button class="select-btn" onclick="setPAL(1.725, this)">Ağır Aktif</button>
-              </div>
-              <div class="btn-group-grid" style="margin-top: 10px;">
-                <button class="select-btn" onclick="setTargetDelta(-500, this)">Kilo Kaybı</button>
-                <button class="select-btn" onclick="setTargetDelta(-300, this)">Hafif Açık</button>
-                <button class="select-btn active" onclick="setTargetDelta(0, this)">Koruma</button>
-                <button class="select-btn" onclick="setTargetDelta(400, this)">Kilo Alma</button>
+              <div class="grid-2">
+                <!-- Sol Sütun: Aktivite -->
+                <div class="btn-col">
+                  <div style="font-size: 0.85rem; font-weight: 700; color: var(--text);">Aktivite (PAL)</div>
+                  <button class="select-btn" onclick="setPAL(1.20, this)">Sedanter (1.20)</button>
+                  <button class="select-btn active" onclick="setPAL(1.375, this)">Hafif Aktif (1.375)</button>
+                  <button class="select-btn" onclick="setPAL(1.55, this)">Orta Aktif (1.55)</button>
+                  <button class="select-btn" onclick="setPAL(1.725, this)">Ağır Aktif (1.725)</button>
+                </div>
+                <!-- Sağ Sütun: Hedef -->
+                <div class="btn-col">
+                  <div style="font-size: 0.85rem; font-weight: 700; color: var(--text);">Hedef</div>
+                  <button class="select-btn" onclick="setTargetDelta(-500, this)">Kilo Kaybı (-500)</button>
+                  <button class="select-btn" onclick="setTargetDelta(-300, this)">Hafif Açık (-300)</button>
+                  <button class="select-btn active" onclick="setTargetDelta(0, this)">Koruma (0)</button>
+                  <button class="select-btn" onclick="setTargetDelta(400, this)">Kilo Alma (+400)</button>
+                </div>
               </div>
               
               <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px;">
@@ -244,14 +245,12 @@
                 ⚠️ ESPEN Obezite Koruması Aktif (Enerji İVA üzerinden hesaplanır).
               </div>
 
-              <!-- STANDART HASTA BUTONLARI -->
               <div class="btn-group-grid" id="grid-doses-std">
                 <button class="select-btn" onclick="setDose(20, 25, this)">20-25 kcal</button>
                 <button class="select-btn active" onclick="setDose(25, 30, this)">25-30 kcal</button>
                 <button class="select-btn" onclick="setDose(30, 35, this)">30-35 kcal</button>
               </div>
 
-              <!-- OBEZ HASTA BUTONLARI (İVA) -->
               <div class="btn-group-grid" id="grid-doses-obese" style="display: none;">
                 <button class="select-btn" onclick="setObeseDose(22, 22, this)">22 kcal (İVA)</button>
                 <button class="select-btn active" onclick="setObeseDose(22, 25, this)">22-25 kcal (İVA)</button>
@@ -292,7 +291,7 @@
 
         <div class="card" style="padding: 8px 16px;">
           <div id="exchange-list-container"></div>
-          <button class="secondary-btn" onclick="openModal()">📄 Rapor / PDF Oluştur</button>
+          <button class="secondary-btn" onclick="openModal()">📄 Rapor Oluştur</button>
         </div>
         <div style="height: 140px;"></div>
       </div>
@@ -304,8 +303,7 @@
           <table class="ref-table">
             <thead>
               <tr>
-                <th>Grup</th>
-                <th>C(g)</th><th>P(g)</th><th>Y(g)</th><th>kcal</th><th>Lif</th><th>Ca</th><th>P</th>
+                <th>Grup</th><th>C(g)</th><th>P(g)</th><th>Y(g)</th><th>kcal</th><th>Lif</th><th>Ca</th><th>P</th>
               </tr>
             </thead>
             <tbody>
@@ -321,18 +319,17 @@
             </tbody>
           </table>
           <div style="margin-top: 12px; font-size: 0.75rem; color: var(--text-muted);">
-            * KBL: Kurubaklagil, EYG: Ekmek Yerine Geçenler (Tahıl).<br>
+            * KBL: Kurubaklagil, EYG: Ekmek Yerine Geçenler.<br>
             * Enerji hesaplamaları Atwater katsayılarına (4-4-9) göredir.
           </div>
         </div>
       </div>
     </main>
 
-    <!-- CANLI SABİT ALT BAR (KAYDIRILABİLİR) -->
+    <!-- CANLI SABİT ALT BAR -->
     <div id="sticky-bar" class="sticky-footer" style="display: none;">
       <div class="carousel-container" id="bottom-carousel" onscroll="handleCarouselScroll()">
-        
-        <!-- KART 1: ENERJİ & MAKRO -->
+        <!-- KART 1: ENERJİ -->
         <div class="carousel-card">
           <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
             <span style="font-size: 1.1rem; font-weight: 800; color: var(--primary-dark);" id="lbl-total-kcal">0 kcal</span>
@@ -345,15 +342,11 @@
           </div>
           <div class="summary-grid-3">
             <div class="mini-box" style="border-left: 3px solid #3b82f6;">CHO<strong id="lbl-cho-sum">0g</strong></div>
-            <div class="mini-box" style="border-left: 3px solid #ef4444;">
-              PRO<strong id="lbl-pro-sum">0g</strong>
-              <span id="lbl-pro-gkg" style="font-size: 0.65rem; color: var(--text-muted);">-</span>
-            </div>
+            <div class="mini-box" style="border-left: 3px solid #ef4444;">PRO<strong id="lbl-pro-sum">0g</strong><span id="lbl-pro-gkg" style="font-size: 0.65rem; color: var(--text-muted);">-</span></div>
             <div class="mini-box" style="border-left: 3px solid #f59e0b;">YAĞ<strong id="lbl-fat-sum">0g</strong></div>
           </div>
         </div>
-
-        <!-- KART 2: POSA & SIVI -->
+        <!-- KART 2: POSA -->
         <div class="carousel-card">
           <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
             <span style="font-size: 0.9rem; font-weight: 700;">Lif & Sıvı</span>
@@ -365,8 +358,7 @@
             <div class="mini-box" style="border-left: 3px solid #0ea5e9;">Sıvı İht.<strong id="lbl-fluid-req">2L</strong></div>
           </div>
         </div>
-
-        <!-- KART 3: MİNERAL PANELİ -->
+        <!-- KART 3: MİNERAL -->
         <div class="carousel-card">
           <div id="box-mineral-poli">
             <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
@@ -410,20 +402,26 @@
         <label>Rapor Başlığı</label>
         <input type="text" id="pdf-diet-title" value="Kişiye Özel Beslenme Programı">
       </div>
-      <div class="form-group">
-        <label>Tarih</label>
-        <input type="text" id="pdf-date" placeholder="GG.AA.YYYY">
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Tarih</label>
+          <input type="text" id="pdf-date" placeholder="GG.AA.YYYY">
+        </div>
+        <div class="form-group">
+          <label>Uzman Ünvanı / Adı</label>
+          <input type="text" id="pdf-expert-name" placeholder="Dyt. Ad Soyad">
+        </div>
       </div>
       <div class="form-group">
-        <label>Uzman Ünvanı ve Adı</label>
-        <input type="text" id="pdf-expert-name" placeholder="Dyt. Ad Soyad">
+        <label>Uyarı ve Öneriler</label>
+        <textarea id="pdf-notes" rows="3" placeholder="Örn: Ara öğünleri atlamayınız. Günde en az 2 litre su tüketiniz."></textarea>
       </div>
-      <button class="action-btn" onclick="generatePDF()">🖨️ Raporu Yazdır / PDF İndir</button>
+      <button class="action-btn" onclick="generatePDF()">🖨️ PDF / Çıktı Al</button>
       <button class="secondary-btn" onclick="closeModal()">İptal</button>
     </div>
   </div>
 
-  <!-- YAZDIRMA ALANI (Tasarım Şablonu) -->
+  <!-- YAZDIRMA ALANI (PDF Şablonu) -->
   <div id="print-section">
     <div class="print-header">
       <div class="print-title" id="print-doc-title">Kişiye Özel Beslenme Programı</div>
@@ -435,32 +433,41 @@
     
     <div class="print-grid">
       <div class="print-box">
-        <strong>Klinik & Antropometrik Profil</strong><br>
+        <strong>Klinik Profil</strong><br><br>
         Boy / Kilo: <span id="print-hw"></span><br>
         BKİ: <span id="print-bmi"></span> kg/m²<br>
         İdeal Kilo (İVA): <span id="print-ibw"></span> kg
       </div>
       <div class="print-box">
-        <strong>Hedefler ve Makrolar</strong><br>
-        Planlanan Enerji: <span id="print-kcal"></span> kcal<br>
+        <strong>Hedefler ve Makrolar</strong><br><br>
+        Enerji: <span id="print-kcal"></span> kcal<br>
         Protein: <span id="print-pro"></span>g (<span id="print-gkg"></span>)<br>
         Sıvı İhtiyacı: <span id="print-fluid"></span>
       </div>
     </div>
 
-    <h4 style="margin-top: 20px; color: var(--primary-dark);">Günlük Besin Değişim Dağılımı</h4>
-    <table class="print-table" id="print-table-body">
-      <!-- JS ile doldurulacak -->
+    <h4 style="margin-top: 20px; margin-bottom: 10px; color: var(--text);">Günlük Besin Değişim Dağılımı</h4>
+    <table class="print-table">
+      <thead>
+        <tr><th>Besin Grubu</th><th>Günlük Porsiyon Miktarı</th></tr>
+      </thead>
+      <tbody id="print-table-body">
+        <!-- JS ile doldurulacak -->
+      </tbody>
     </table>
 
+    <div class="print-notes-box" id="print-notes-container" style="display: none;">
+      <strong style="color: var(--primary-dark);">Uyarı ve Öneriler:</strong>
+      <div id="print-notes-text" style="margin-top: 8px;"></div>
+    </div>
+
     <div class="print-footer">
-      İmza / Uzman: <br>
+      Uzman İmzası<br><br>
       <span id="print-expert" style="font-weight: normal; font-size: 16px;"></span>
     </div>
   </div>
 
   <script>
-    // SADELEŞTİRİLMİŞ VERİTABANI
     const EXCHANGES = [
       { id: 'sut_tam', name: 'Süt (Tam)', cho: 6, pro: 6, fat: 6, kcal: 102, fiber: 0, sol: 0, insol: 0, ca: 240, p: 200, count: 0 },
       { id: 'sut_yarim', name: 'Süt (Yarım/Yağsız)', cho: 6, pro: 6, fat: 3, kcal: 75, fiber: 0, sol: 0, insol: 0, ca: 240, p: 200, count: 0 },
@@ -485,7 +492,6 @@
       renderExchangeList();
       const today = new Date();
       document.getElementById('pdf-date').value = today.toLocaleDateString('tr-TR');
-      // Kaydedilmiş uzman adını getir
       const savedExpert = localStorage.getItem('diet_expert_name');
       if(savedExpert) document.getElementById('pdf-expert-name').value = savedExpert;
     });
@@ -502,12 +508,7 @@
       if(tabId === 'tab-degisim') updateSummary();
     }
 
-    function setGender(g) {
-      state.gender = g;
-      document.getElementById('btn-gender-f').classList.toggle('active', g === 'kadin');
-      document.getElementById('btn-gender-m').classList.toggle('active', g === 'erkek');
-      calculateEnergy();
-    }
+    function setGender(g) { state.gender = g; document.getElementById('btn-gender-f').classList.toggle('active', g === 'kadin'); document.getElementById('btn-gender-m').classList.toggle('active', g === 'erkek'); calculateEnergy(); }
 
     function setMode(m) {
       state.mode = m;
@@ -519,7 +520,6 @@
       document.getElementById('box-mineral-poli').style.display = (m === 'poliklinik') ? 'block' : 'none';
       document.getElementById('box-mineral-klinik').style.display = (m === 'klinik') ? 'block' : 'none';
       
-      // PDF Başlığını moda göre akıllı değiştir
       document.getElementById('pdf-diet-title').value = (m === 'klinik') ? 'Tıbbi Beslenme Tedavisi (TBT)' : 'Kişiye Özel Beslenme Programı';
       calculateEnergy();
     }
@@ -534,13 +534,11 @@
       elem.classList.add('active');
     }
 
-    // --- ENERJİ MOTORU & PROGRESSIVE UI ---
     function calculateEnergy() {
       state.age = parseFloat(document.getElementById('inp-age').value) || 0;
       let h = parseFloat(document.getElementById('inp-height').value) || 0;
       state.weight = parseFloat(document.getElementById('inp-weight').value) || 0;
 
-      // Sıfır Durumu (Ağırlık Yoksa Aşağıyı Gizle)
       if (state.weight < 30 || h < 100 || state.age < 18) {
         document.getElementById('calc-results-container').style.display = 'none';
         return;
@@ -553,15 +551,13 @@
 
       state.refStandard = document.getElementById('sel-ref').value;
       let refBMI = 22.0;
-      if (state.refStandard === 'who') {
-        refBMI = (state.age >= 65) ? 24.0 : 22.0;
-      } else {
+      if (state.refStandard === 'who') { refBMI = (state.age >= 65) ? 24.0 : 22.0; } 
+      else {
         if (state.age < 25) refBMI = 21.5; else if (state.age < 35) refBMI = 22.5; else if (state.age < 45) refBMI = 23.5;
         else if (state.age < 55) refBMI = 24.5; else if (state.age < 65) refBMI = 25.5; else refBMI = 26.5;
       }
       state.ibw = refBMI * (hm * hm);
       
-      // BMI BAR GÖRSELLEŞTİRME EKRANI
       document.getElementById('res-bmi').innerHTML = `${state.bmi.toFixed(1)} <span style="font-size: 0.75rem; color: var(--text-muted);">kg/m²</span>`;
       document.getElementById('res-ibw').innerText = state.ibw.toFixed(1);
       const diff = state.weight - state.ibw;
@@ -573,12 +569,10 @@
       else if (state.bmi < 30.0) { badge.innerText = 'Hafif Şişman'; badge.style.color = 'var(--warning)'; }
       else { badge.innerText = 'Obez'; badge.style.color = 'var(--danger)'; }
 
-      // Marker Pozisyonları (Linear Interpolation: BMI 15 to 40)
       const calcPos = (val) => Math.max(0, Math.min(100, ((val - 15) / 25) * 100));
       document.getElementById('bmi-marker-current').style.left = calcPos(state.bmi) + '%';
       document.getElementById('bmi-marker-ideal').style.left = calcPos(refBMI) + '%';
 
-      // Poliklinik BMR
       let bmr = (state.gender === 'erkek') 
         ? (10 * state.weight) + (6.25 * state.height) - (5 * state.age) + 5
         : (10 * state.weight) + (6.25 * state.height) - (5 * state.age) - 161;
@@ -588,7 +582,6 @@
       let polyTarget = tee + state.targetDelta;
       document.getElementById('res-target-final').innerText = polyTarget;
 
-      // Klinik Mod
       const isObese = (state.bmi >= 30.0);
       document.getElementById('alert-obesity').style.display = isObese ? 'block' : 'none';
       document.getElementById('grid-doses-std').style.display = isObese ? 'none' : 'grid';
@@ -600,7 +593,7 @@
       if (isObese) {
         let bMin = Math.min(24, Math.round(state.obeseMinDose * (1 + fever)));
         cMin = Math.round(state.ibw * bMin);
-        cMax = Math.round(state.ibw * state.obeseMaxDose); // 25 tavan
+        cMax = Math.round(state.ibw * state.obeseMaxDose);
       } else {
         let bMin = Math.min(32, Math.round(state.clinicalMinDose * (1 + fever)));
         let bMax = Math.min(35, Math.round(state.clinicalMaxDose * (1 + fever)));
@@ -617,7 +610,6 @@
       switchTab('tab-degisim');
     }
 
-    // --- DEĞİŞİM RENDER & KLAVYE GİRDİSİ ---
     function renderExchangeList() {
       const container = document.getElementById('exchange-list-container');
       container.innerHTML = '';
@@ -688,14 +680,12 @@
       document.getElementById('lbl-pro-sum').innerText = `${Math.round(tP)}g (%${pP})`;
       document.getElementById('lbl-fat-sum').innerText = `${Math.round(tF)}g (%${fP})`;
 
-      // Protein g/kg (Obezite = İdeal, Normal = Aktüel)
       if (tP > 0 && state.weight > 0) {
         document.getElementById('lbl-pro-gkg').innerText = (state.bmi >= 30 && state.ibw > 0) 
           ? `${(tP / state.ibw).toFixed(2)} g/kg (İVA)` 
           : `${(tP / state.weight).toFixed(2)} g/kg`;
       } else { document.getElementById('lbl-pro-gkg').innerText = '-'; }
 
-      // Fiber & Fluid
       document.getElementById('lbl-total-fiber').innerText = `${tFib.toFixed(1)}g`;
       document.getElementById('lbl-sol-fiber').innerText = `${tSol.toFixed(1)}g`;
       document.getElementById('lbl-fluid-req').innerText = `${((state.weight * 30)/1000).toFixed(1)} L`;
@@ -704,7 +694,6 @@
       if(tFib > 50) { fAl.innerText = '⚠️ Mineral Riski'; fAl.style.color = 'var(--danger)'; }
       else { fAl.innerText = 'Güvenli'; fAl.style.color = 'var(--success)'; }
 
-      // Minerals
       document.getElementById('lbl-ca-sum').innerText = `${Math.round(tCa)}mg`;
       document.getElementById('lbl-p-sum').innerText = `${Math.round(tPhos)}mg`;
       document.getElementById('lbl-ca-sum-k').innerText = `${Math.round(tCa)}mg`;
@@ -724,19 +713,18 @@
       else { rAl.innerText = 'Güvenli'; rAl.style.color = 'var(--text)'; }
     }
 
-    // --- MODAL VE YAZDIRMA (PDF) ---
     function openModal() { document.getElementById('report-modal').style.display = 'flex'; }
     function closeModal() { document.getElementById('report-modal').style.display = 'none'; }
 
     function generatePDF() {
-      // Bilgileri Çek ve Kaydet
       const pName = document.getElementById('pdf-patient-name').value || 'Belirtilmedi';
       const dTitle = document.getElementById('pdf-diet-title').value || 'Kişiye Özel Beslenme Programı';
       const pDate = document.getElementById('pdf-date').value;
       const eName = document.getElementById('pdf-expert-name').value;
+      const notes = document.getElementById('pdf-notes').value;
+      
       if(eName) localStorage.setItem('diet_expert_name', eName);
 
-      // DOM'a Yaz
       document.getElementById('print-doc-title').innerText = dTitle;
       document.getElementById('print-patient').innerText = pName;
       document.getElementById('print-date').innerText = pDate;
@@ -751,17 +739,30 @@
       document.getElementById('print-gkg').innerText = document.getElementById('lbl-pro-gkg').innerText;
       document.getElementById('print-fluid').innerText = document.getElementById('lbl-fluid-req').innerText;
 
-      // Porsiyon Tablosu
-      let tbody = '<tr><th>Besin Grubu</th><th>Günlük Porsiyon</th></tr>';
+      let tbody = '';
       EXCHANGES.forEach(ex => {
         if(ex.count > 0) {
           tbody += `<tr><td>${ex.name}</td><td><strong>${ex.count}</strong></td></tr>`;
         }
       });
-      document.getElementById('print-table-body').innerHTML = tbody;
+      document.getElementById('print-table-body').innerHTML = tbody || '<tr><td colspan="2">Porsiyon girilmedi.</td></tr>';
+
+      // Uyarı ve Öneriler Kısmını İşle
+      const notesContainer = document.getElementById('print-notes-container');
+      const notesText = document.getElementById('print-notes-text');
+      if (notes.trim() !== '') {
+        notesText.innerHTML = notes.replace(/\n/g, '<br>');
+        notesContainer.style.display = 'block';
+      } else {
+        notesContainer.style.display = 'none';
+      }
 
       closeModal();
-      window.print(); // Tarayıcının yerel PDF/Yazdır diyaloğunu tetikler
+      
+      // Modalın kapanma animasyonunu bekleyip yazdır (Bug'ı önler)
+      setTimeout(() => {
+        window.print();
+      }, 300);
     }
   </script>
 </body>
